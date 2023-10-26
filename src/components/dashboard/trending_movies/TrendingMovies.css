@@ -1,0 +1,39 @@
+.trending-movies {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    justify-items: center;
+}
+.trending-movie-list-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 80%;
+    gap: 20px;
+    padding: 10px;
+    background-image: url('../../../../public/assets/trending-movies-bg.png');
+}
+.trending-movie-card {
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
+}
+.trending-img-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+    cursor: pointer;
+}
+.trending-img-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+
+.MuiToggleButtonGroup-root {
+    padding: 0 10px;
+    height: 25px;
+    align-self: center;
+}
+.MuiButtonBase-root.Mui-selected {
+    font-weight: 550;
+    color: white !important;
+    background: #194569 !important;
+}
