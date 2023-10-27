@@ -5,7 +5,7 @@ const Navbar = (props) => {
     return (
         <React.Fragment>
             <HideOnScroll {...props}>
-                <AppBar elevation={0} sx={{background: '#1A4568'}}>
+                <AppBar elevation={0} sx={{background: 'var(--app-bar-primary)'}}>
                     <Toolbar>
                         <Typography variant='h6' component='div'>
                             Movie DB

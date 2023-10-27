@@ -26,9 +26,9 @@ const TrendingMovies = (props) => {
     return (
         <div className='trending-movies'>
             <div style={{width: '80%', display: 'flex'}}>
-                <Typography sx={{textAlign: 'left', fontWeight: 'bold', color: '#194569', alignSelf: 'center'}} variant='h6'>Trending Movies</Typography>
+                <Typography sx={{textAlign: 'left', fontWeight: 'bold', color: 'var(--app-color-primary)', alignSelf: 'center'}} variant='h6'>Trending Movies</Typography>
                 <ToggleButtonGroup 
-                    sx={{color: '#194569'}} size="small"
+                    size="small"
                     value={movieFilter.type} 
                     exclusive
                     onChange={onTrendingMovieChange}
@@ -37,13 +37,11 @@ const TrendingMovies = (props) => {
                     <ToggleButton value='week'>This Week</ToggleButton>
                 </ToggleButtonGroup>
             </div>
-            <div className='trending-movie-list-container'>
-            {
-                trendingMovies?.results?.map(movie => (
+            {trendingMovies?.results.length > 0 && <div className='trending-movie-list-container'>
+                {trendingMovies?.results?.map(movie => (
                     <TrendingMovieCard movie={movie} key={movie?.id}/>
-                ))
-            }
-            </div>
+                ))}
+            </div>}
         </div>
     )
 }

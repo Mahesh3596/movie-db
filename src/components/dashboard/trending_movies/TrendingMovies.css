@@ -16,12 +16,14 @@
     display: flex;
     flex-direction: column;
     width: 10vw;
+    position: relative;
 }
 .trending-img-card {
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transition: 0.3s;
     cursor: pointer;
+    background: url('../../../../public/assets/trending-movies-ph.png');
 }
 .trending-img-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
@@ -35,5 +37,5 @@
 .MuiButtonBase-root.Mui-selected {
     font-weight: 550;
     color: white !important;
-    background: #194569 !important;
+    background: var(--app-color-primary) !important;
 }
