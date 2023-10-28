@@ -16,6 +16,7 @@ const TrendingMovies = (props) => {
 
     const getMovieData = async (filter={}) => {
         showLoading(true)
+        setTrendingMovies(null)
         const res = await getTrendingMovies(filter)
         setTrendingMovies((prevState) => ({
             ...prevState,
