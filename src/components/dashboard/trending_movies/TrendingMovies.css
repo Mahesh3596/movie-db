@@ -2,6 +2,7 @@
     display: grid;
     grid-template-rows: auto 1fr;
     justify-items: center;
+    margin-top: 15px;
 }
 .trending-movie-list-container {
     display: flex;

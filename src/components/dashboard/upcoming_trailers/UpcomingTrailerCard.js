@@ -1,17 +1,20 @@
 import { Typography } from "@mui/material";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import playIcon from '../../../assets/icon-trailer-play.png'
+import { AppContext } from "../../../contexts/AppContext";
 import { getUpcomingMovieVideos } from "../../../services/TMDBMovies";
 import TrailerPopup from "./TrailerPopup";
 
 const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => {
+    const {showLoading} = useContext(AppContext)
     const [movieVideoData, setMovieVideoData] = useState(null)
     const [trailerPopupObj, setTrailerPopupObj] = useState({open: false, trailerObj: {}})
     useEffect(() => {
         if (movie?.id && !movieVideoData) getMovieData({movieId: movie.id}) 
     }, [movie])
     const getMovieData = async (filter) => {
+        showLoading(true)
         const res = await getUpcomingMovieVideos(filter)
         let videoData = res?.results?.find((movie) => {if(movie.type === 'Trailer') return movie})
         videoData = typeof videoData != 'object' ? res?.results[0] : videoData
@@ -19,6 +22,7 @@ const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => 
             ...prevState,
             ...videoData
         }))
+        showLoading(false)
     }
     const onImageHover = (isMouseOn, obj) => {
         if (isMouseOn) onThumbnailHover(obj.backdrop_path)

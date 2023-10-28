@@ -2,6 +2,7 @@ html {
   --app-bar-primary: #1A4568;
   --app-color-primary: #194569;
   --app-color-secondary: #DBEBF4;
+  --app-loader-bg: rgba(219, 235, 244, 0.7);
 }
 
 body {

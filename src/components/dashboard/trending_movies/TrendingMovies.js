@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './TrendingMovies.css'
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { getTrendingMovies } from '../../../services/TMDBMovies';
 import TrendingMovieCard from './TrendingMovieCard';
+import { AppContext } from '../../../contexts/AppContext';
 
 const TrendingMovies = (props) => {
+    const {showLoading} = useContext(AppContext)
     const [trendingMovies, setTrendingMovies] = useState(null)
     const [movieFilter, setMovieFilter] = useState({type: 'day', language: 'en-US'})
     
@@ -13,11 +15,13 @@ const TrendingMovies = (props) => {
     }, [])
 
     const getMovieData = async (filter={}) => {
+        showLoading(true)
         const res = await getTrendingMovies(filter)
         setTrendingMovies((prevState) => ({
             ...prevState,
             ...res
         }))
+        showLoading(false)
     }
     const onTrendingMovieChange = async (event, typeValue) => {
         setMovieFilter(prevState => ({...prevState, type: typeValue}))
@@ -25,7 +29,7 @@ const TrendingMovies = (props) => {
     }
     return (
         <div className='trending-movies'>
-            <div style={{width: '80%', display: 'flex'}}>
+            <div style={{width: '80%', display: 'flex', marginBottom: '10px'}}>
                 <Typography sx={{textAlign: 'left', fontWeight: 'bold', color: 'var(--app-color-primary)', alignSelf: 'center'}} variant='h6'>Trending Movies</Typography>
                 <ToggleButtonGroup 
                     size="small"
