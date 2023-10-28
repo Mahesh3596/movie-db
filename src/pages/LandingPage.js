@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import TrendingMovies from '../components/dashboard/trending_movies/TrendingMovies';
+import UpcomingTrailers from '../components/dashboard/upcoming_trailers/UpcomingTrailers';
 import Navbar from '../components/navbar/Navbar';
 import { AppContext } from '../contexts/AppContext';
 
@@ -16,6 +17,7 @@ const LandingPage = (props) => {
             <Navbar/>
             <div className='app-container'>
                 <TrendingMovies/>
+                <UpcomingTrailers/>
             </div>
         </React.Fragment>
     )

@@ -16,16 +16,15 @@ const TrendingMovieCard = ({movie}) => {
             <img 
                 className='trending-img-card'
                 loading='lazy'
-                width="179px"
-                height="269px"
+                style={{maxWidth: "179px", maxHeight: "269px"}}
                 src={`${imageBaseURL}/w220_and_h330_face${movie.poster_path}`}
                 srcSet={`${imageBaseURL}/w220_and_h330_face${movie.poster_path} 1x, ${imageBaseURL}/w440_and_h660_face${movie.poster_path} 2x`} 
                 alt={movie.title}/>
             <div style={{marginTop: '10px'}}>
-                <Typography sx={{textAlign: 'left', fontWeight: 'bold', color: 'var(--app-color-primary)', alignSelf: 'center'}} variant='h7'>
+                <Typography sx={{fontWeight: 'bold', color: 'var(--app-color-primary)'}} variant='subtitle2'>
                     {movie.title}
                 </Typography>
-                <Typography sx={{textAlign: 'left', color: 'var(--app-color-primary)', alignSelf: 'center'}} variant='subtitle2'>
+                <Typography sx={{color: 'var(--app-color-primary)'}} variant='subtitle2'>
                     {moment(movie.release_date).format('MMM DD, YYYY')}
                 </Typography>
             </div>

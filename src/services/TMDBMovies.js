@@ -14,7 +14,36 @@ const getTrendingMovies = async ({type='day', language='en-US'}) => {
     .then(response => response)
     .catch(err => console.error(err));
 }
+const getUpcomingMovies = async ({language='en-US', page=1}) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: tmdb_bearer_token
+    }
+  };
+  return await fetch(`${tmdb_base_url}/movie/upcoming?language=${language}&page=${page}`, options)
+    .then(response => response.json())
+    .then(response => response)
+    .catch(err => console.error(err));
+}
+const getUpcomingMovieVideos = async ({movieId, language='en-US'}) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: tmdb_bearer_token
+    }
+  };
+  
+  return await fetch(`${tmdb_base_url}/movie/${movieId}/videos?language=${language}`, options)
+    .then(response => response.json())
+    .then(response => response)
+    .catch(err => console.error(err));
+}
 
 module.exports = {
-    getTrendingMovies
+    getTrendingMovies,
+    getUpcomingMovies,
+    getUpcomingMovieVideos
 }

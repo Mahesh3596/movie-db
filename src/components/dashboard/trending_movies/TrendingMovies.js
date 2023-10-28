@@ -39,7 +39,7 @@ const TrendingMovies = (props) => {
             </div>
             {trendingMovies?.results.length > 0 && <div className='trending-movie-list-container'>
                 {trendingMovies?.results?.map(movie => (
-                    <TrendingMovieCard movie={movie} key={movie?.id}/>
+                    <TrendingMovieCard movie={movie} key={'tm'+movie?.id}/>
                 ))}
             </div>}
         </div>
