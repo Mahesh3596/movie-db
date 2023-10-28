@@ -16,8 +16,8 @@ const LandingPage = (props) => {
         <React.Fragment>
             <Navbar/>
             <div className='app-container'>
-                <TrendingMovies/>
                 <UpcomingTrailers/>
+                <TrendingMovies/>
             </div>
         </React.Fragment>
     )

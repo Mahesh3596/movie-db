@@ -3,9 +3,11 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import playIcon from '../../../assets/icon-trailer-play.png'
 import { getUpcomingMovieVideos } from "../../../services/TMDBMovies";
+import TrailerPopup from "./TrailerPopup";
 
 const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => {
     const [movieVideoData, setMovieVideoData] = useState(null)
+    const [trailerPopupObj, setTrailerPopupObj] = useState({open: false, trailerObj: {}})
     useEffect(() => {
         if (movie?.id && !movieVideoData) getMovieData({movieId: movie.id}) 
     }, [movie])
@@ -27,8 +29,19 @@ const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => 
         document.getElementsByClassName(`upcoming-trailer-play-icon-${obj.id}`)[0]
         .setAttribute("style", "transform: scale("+playScale+"); transition: 0.3s; cursor: pointer;");
     }
+    const onHandlePopupClose = () => {
+        setTrailerPopupObj(prevState => ({...prevState, open: false, trailerObj: {}}))
+    }
+    const showTrailerPopup = () => {
+        if (trailerPopupObj.open == false) {
+            setTrailerPopupObj(prevState => ({...prevState, open: true, trailerObj: movieVideoData}))
+        }
+    }
     return (
-        imageBaseURL && movieVideoData?.key && <div className="upcoming-trailer-card" onMouseOver={() => onImageHover(true, movie)} onMouseLeave={() => onImageHover(false, movie)}>
+        imageBaseURL && movieVideoData?.key && <div className="upcoming-trailer-card" 
+            onMouseOver={() => onImageHover(true, movie)} 
+            onMouseLeave={() => onImageHover(false, movie)}
+            onClick={showTrailerPopup}>
             <img
                 className={`upcoming-trailer-img-card-${movie.id}`}
                 loading="lazy"
@@ -55,6 +68,9 @@ const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => 
                     {movieVideoData?.name ||  moment(movie.release_date).format('MMM DD, YYYY')}
                 </Typography>
             </div>
+            <TrailerPopup showTrailer={trailerPopupObj.open} 
+                trailerObj={trailerPopupObj.trailerObj} 
+                handleClose={onHandlePopupClose}/>
         </div>
     )
 }
