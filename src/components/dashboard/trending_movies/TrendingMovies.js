@@ -42,11 +42,11 @@ const TrendingMovies = (props) => {
                     <ToggleButton value='week'>This Week</ToggleButton>
                 </ToggleButtonGroup>
             </div>
-            {trendingMovies?.results.length > 0 && <div className='trending-movie-list-container'>
-                {trendingMovies?.results?.map(movie => (
+            <div className='trending-movie-list-container'>
+                {trendingMovies?.results.length > 0 && trendingMovies?.results?.map(movie => (
                     <TrendingMovieCard movie={movie} key={'tm'+movie?.id}/>
                 ))}
-            </div>}
+            </div>
         </div>
     )
 }

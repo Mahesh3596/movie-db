@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Navbar from 'components/navbar/Navbar';
 import { AppContext } from 'contexts/AppContext';
 import Dashboard from './Dashboard';
+import Movie from './Movie';
 
 const LandingPage = (props) => {
     const {getTMDBConfigValue, showLoading} = useContext(AppContext)
@@ -20,6 +21,7 @@ const LandingPage = (props) => {
             <div className='app-container'>
                 <Routes>
                     <Route key="dashboard" exact path='/' element={<Dashboard/>}/>
+                    <Route key="dashboard" exact path='/movie' element={<Movie/>}/>
                 </Routes>
             </div>
         </React.Fragment>
