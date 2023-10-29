@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Loader from "../components/loader/Loader";
-import { getConfigurationDetails } from "../services/TMDBConfig";
+import Loader from "components/loader/Loader";
+import { getConfigurationDetails } from "services/TMDBConfig";
 
 export const AppContext = React.createContext({})
 

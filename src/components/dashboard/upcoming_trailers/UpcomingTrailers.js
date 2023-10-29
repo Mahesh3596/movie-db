@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../../contexts/AppContext';
-import { getUpcomingMovies } from '../../../services/TMDBMovies';
+import { AppContext } from 'contexts/AppContext';
+import { getUpcomingMovies } from 'services/TMDBMovies';
 import UpcomingTrailerCard from './UpcomingTrailerCard';
 import './UpcomingTrailers.css'
 
@@ -37,7 +37,11 @@ const UpcomingTrailers = () => {
                 <div style={{background: 'linear-gradient(to right, rgb(25 69 105 / 50%) 0%, rgb(219 235 244 / 50%) 100%', 
                     width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <div style={{alignSelf: 'left', width: '100%'}}>
-                        <Typography sx={{fontWeight: 'bold', color: 'white', padding: '20px 30px 0 30px'}} variant='h6'>Upcoming Movie Trailers</Typography>
+                        <Typography  className="txt-ellipsis-1"
+                            sx={{fontWeight: 'bold', color: 'white', padding: '20px 30px 0 30px'}} 
+                            variant='h6'>
+                            Recent & Upcoming Movie Trailers
+                        </Typography>
                     </div>
                     <div className='upcoming-trailer-list-container'>
                         {imageBaseURL && upComingMovies?.results?.map((movie) => (

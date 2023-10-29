@@ -1,4 +1,4 @@
-const { tmdb_bearer_token, tmdb_base_url } = require("../config");
+const { tmdb_bearer_token, tmdb_base_url } = require("config");
 
 const getTrendingMovies = async ({type='day', language='en-US'}) => {
     const options = {

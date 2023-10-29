@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
-import playIcon from '../../../assets/icon-trailer-play.png'
-import { AppContext } from "../../../contexts/AppContext";
-import { getUpcomingMovieVideos } from "../../../services/TMDBMovies";
+import playIcon from 'assets/icon-trailer-play.png'
+import { AppContext } from "contexts/AppContext";
+import { getUpcomingMovieVideos } from "services/TMDBMovies";
 import TrailerPopup from "./TrailerPopup";
 
 const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => {
@@ -62,13 +62,11 @@ const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => 
                 />
             </div>
             <div style={{marginTop: '10px'}}>
-                <Typography sx={{fontWeight: 'bold', color: 'var(--app-color-secondary)', 
-                    display: 'inline-block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '350px', overflow: 'hidden'}} 
+                <Typography className="txt-ellipsis-1" sx={{fontWeight: 'bold', color: 'var(--app-color-secondary)', maxWidth: '350px'}} 
                     variant='h7'>
                     {movie.title}
                 </Typography>
-                <Typography sx={{color: 'var(--app-color-secondary)',
-                    display: 'block', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '350px', overflow: 'hidden'}} variant='subtitle2'>
+                <Typography className="txt-ellipsis-1" sx={{color: 'var(--app-color-secondary)', maxWidth: '350px'}} variant='subtitle2'>
                     {movieVideoData?.name ||  moment(movie.release_date).format('MMM DD, YYYY')}
                 </Typography>
             </div>

@@ -1,5 +1,5 @@
-import loaderCamera from '../../assets/loader-camera.png'
-import loaderReel from '../../assets/loader-reel.png'
+import loaderCamera from 'assets/loader-camera.png'
+import loaderReel from 'assets/loader-reel.png'
 import './Loader.css'
 
 const Loader = () => {

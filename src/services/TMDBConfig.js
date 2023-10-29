@@ -1,4 +1,4 @@
-const { tmdb_bearer_token, tmdb_base_url } = require("../config");
+const { tmdb_bearer_token, tmdb_base_url } = require("config");
 
 const getConfigurationDetails = async () => {
     const options = {

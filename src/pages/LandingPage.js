@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import TrendingMovies from '../components/dashboard/trending_movies/TrendingMovies';
-import UpcomingTrailers from '../components/dashboard/upcoming_trailers/UpcomingTrailers';
-import Navbar from '../components/navbar/Navbar';
-import { AppContext } from '../contexts/AppContext';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from 'components/navbar/Navbar';
+import { AppContext } from 'contexts/AppContext';
+import Dashboard from './Dashboard';
 
 const LandingPage = (props) => {
     const {getTMDBConfigValue, showLoading} = useContext(AppContext)
@@ -18,8 +18,9 @@ const LandingPage = (props) => {
         <React.Fragment>
             <Navbar/>
             <div className='app-container'>
-                <UpcomingTrailers/>
-                <TrendingMovies/>
+                <Routes>
+                    <Route key="dashboard" exact path='/' element={<Dashboard/>}/>
+                </Routes>
             </div>
         </React.Fragment>
     )

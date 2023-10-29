@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material"
+import { AppContext } from "contexts/AppContext"
 import moment from "moment"
 import { useContext, useEffect, useState } from "react"
-import { AppContext } from "../../../contexts/AppContext"
 import Rating from "./Rating"
 
 const TrendingMovieCard = ({movie}) => {

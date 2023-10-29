@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppBar, Slide, Toolbar, Typography, useScrollTrigger } from '@mui/material';
-import AppLogo from '../../assets/app-logo.png'
+import AppLogo from 'assets/app-logo.png'
 
 const Navbar = (props) => {
     return (

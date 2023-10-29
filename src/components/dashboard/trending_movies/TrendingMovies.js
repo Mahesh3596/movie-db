@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import './TrendingMovies.css'
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
-import { getTrendingMovies } from '../../../services/TMDBMovies';
 import TrendingMovieCard from './TrendingMovieCard';
-import { AppContext } from '../../../contexts/AppContext';
+import { getTrendingMovies } from 'services/TMDBMovies';
+import { AppContext } from 'contexts/AppContext';
 
 const TrendingMovies = (props) => {
     const {showLoading} = useContext(AppContext)

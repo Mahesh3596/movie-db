@@ -6,3 +6,10 @@
     padding: 80px 0 0 0;
     overflow: auto;
 }
+
+.txt-ellipsis-1 {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
