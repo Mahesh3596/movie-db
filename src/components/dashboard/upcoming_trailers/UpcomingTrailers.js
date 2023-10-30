@@ -1,33 +1,21 @@
 import { Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from 'contexts/AppContext';
-import { getUpcomingMovies } from 'services/TMDBMovies';
 import UpcomingTrailerCard from './UpcomingTrailerCard';
 import './UpcomingTrailers.css'
 
-const UpcomingTrailers = () => {
-    const {tmdbConfig, showLoading} = useContext(AppContext)
+const UpcomingTrailers = ({upComingMovies=null, onChangeUpcomingMovies=()=>{}}) => {
+    const {tmdbConfig} = useContext(AppContext)
     const [imageBaseURL, setImageBaseURL] = useState(null)
-    const [upComingMovies, setUpcomingMovies] = useState(null)
     const [backdrop, setBackdrop] = useState('')
-    useEffect(() => {
-        if(!upComingMovies) getMovieData()
-    }, [])
+
     useEffect(() => {
         if (!imageBaseURL && tmdbConfig?.images?.base_url) setImageBaseURL(tmdbConfig.images.base_url)
     }, [tmdbConfig])
     useEffect(() => {
         if (upComingMovies?.results) setBackdrop(`${imageBaseURL}/w1920_and_h427_multi_faces${upComingMovies?.results[0]?.backdrop_path}`)
     }, [imageBaseURL, upComingMovies])
-    const getMovieData = async () => {
-        showLoading(true)
-        const res = await getUpcomingMovies({})
-        setUpcomingMovies((prevState) => ({
-            ...prevState,
-            ...res
-        }))
-        showLoading(false)
-    }
+
     const onThumbnailHover = (backdrop_path) => {
         setBackdrop(`${imageBaseURL}/w1920_and_h427_multi_faces${backdrop_path}`)
     }

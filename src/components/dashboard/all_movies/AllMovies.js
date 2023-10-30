@@ -9,7 +9,7 @@ const AllMovies = () => {
         const res = await getAllMovies({})
     }
     return (
-        <div className="all-movies-container">
+        <div className="all-movies">
             
         </div>
     )
