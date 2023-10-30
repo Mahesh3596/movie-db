@@ -24,10 +24,12 @@ const TrendingMovies = ({trendingMovies=null, onChangeTrendingMovies=()=>{}}) =>
                     <ToggleButton value='week'>This Week</ToggleButton>
                 </ToggleButtonGroup>
             </div>
-            <div className='trending-movie-list-container'>
-                {trendingMovies?.results.length > 0 && trendingMovies?.results?.map(movie => (
-                    <TrendingMovieCard movie={movie} key={'tm'+movie?.id}/>
-                ))}
+            <div className="trending-movie-list-container">
+                <div className='trending-movie-list'>
+                    {trendingMovies?.results.length > 0 && trendingMovies?.results?.map(movie => (
+                        <TrendingMovieCard movie={movie} key={'tm'+movie?.id}/>
+                    ))}
+                </div>
             </div>
         </div>
     )

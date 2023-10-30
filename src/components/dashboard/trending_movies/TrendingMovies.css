@@ -5,19 +5,23 @@
     margin-top: 15px;
 }
 .trending-movie-list-container {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: auto; 
     width: 80%;
     min-height: 30vh;
+    background-image: url('../../../../public/assets/trending-movies-bg.png');
+}
+.trending-movie-list {
+    display: flex;
+    flex-wrap: nowrap;
+    /* overflow-x: auto; */
+    /* width: 80%; */
+    /* min-height: 30vh; */
     gap: 20px;
     padding: 10px;
-    background-image: url('../../../../public/assets/trending-movies-bg.png');
 }
 .trending-movie-card {
     display: flex;
     flex-direction: column;
-    width: 10vw;
     position: relative;
 }
 .trending-img-card {
