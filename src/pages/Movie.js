@@ -1,4 +1,4 @@
-import AllMovies from "components/dashboard/all_movies/AllMovies";
+import AllMovies from "components/movie/all_movies/AllMovies";
 
 const Movie = () => {
     return (

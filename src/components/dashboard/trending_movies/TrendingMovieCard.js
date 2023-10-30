@@ -22,7 +22,7 @@ const TrendingMovieCard = ({movie}) => {
                 alt={movie.title}/>
             <div style={{marginTop: '10px'}}>
                 <Typography sx={{fontWeight: 'bold', color: 'var(--app-color-primary)'}} variant='subtitle2'>
-                    {movie.title}
+                    {movie?.title || movie?.name}
                 </Typography>
                 <Typography sx={{color: 'var(--app-color-primary)'}} variant='subtitle2'>
                     {moment(movie.release_date).format('MMM DD, YYYY')}

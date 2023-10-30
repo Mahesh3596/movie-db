@@ -3,7 +3,7 @@ import './TrendingMovies.css'
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import TrendingMovieCard from './TrendingMovieCard';
 
-const TrendingMovies = ({trendingMovies=null, onChangeTrendingMovies=()=>{}}) => {
+const TrendingMovies = ({trendingMovies=null, onChangeTrendingMovies=()=>{}, showType='movie'}) => {
     const [movieFilter, setMovieFilter] = useState({type: 'day', language: 'en-US'})
 
     const onTrendingMovieChange = (event, typeValue) => {
@@ -13,7 +13,9 @@ const TrendingMovies = ({trendingMovies=null, onChangeTrendingMovies=()=>{}}) =>
     return (
         <div className='trending-movies'>
             <div style={{width: '80%', display: 'flex', marginBottom: '10px'}}>
-                <Typography sx={{textAlign: 'left', fontWeight: 'bold', color: 'var(--app-color-primary)', alignSelf: 'center'}} variant='h6'>Trending Movies</Typography>
+                <Typography sx={{textAlign: 'left', fontWeight: 'bold', color: 'var(--app-color-primary)', alignSelf: 'center'}} variant='h6'>
+                    Trending {showType=='tv' ? 'TV Shows' : 'Movies'}
+                </Typography>
                 <ToggleButtonGroup 
                     size="small"
                     value={movieFilter.type} 

@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { getAllMovies } from "services/TMDBMovies"
+import './AllMovies.css'
 
 const AllMovies = () => {
     useEffect(() => {

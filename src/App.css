@@ -1,10 +1,6 @@
 .app-container {
-    /* display: flex; */
-    background: #DBEBF4;
     height: 100vh;
-    /* justify-content: center; */
     padding: 80px 0 0 0;
-    overflow: auto;
 }
 
 .txt-ellipsis-1 {

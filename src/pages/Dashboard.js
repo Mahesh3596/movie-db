@@ -7,6 +7,7 @@ const Dashboard = () => {
     const {showLoading} = useContext(AppContext)
     const [upComingMovies, setUpcomingMovies] = useState(null)
     const [trendingMovies, setTrendingMovies] = useState(null)
+    const [trendingTVShows, setTrendingTVShows] = useState(null)
     useEffect(() => {
         if(!trendingMovies && !upComingMovies) getDashboardMovieData()
     }, [])
@@ -14,6 +15,7 @@ const Dashboard = () => {
         showLoading(true)
         await getMovieDatas('trending_movies')
         await getMovieDatas('upcoming_movies')
+        await getMovieDatas('trending_tv_shows')
         showLoading(false)
     }
     const getMovieDatas = async (section='', filter={}) => {
@@ -35,6 +37,14 @@ const Dashboard = () => {
                     ...res
                 }))
                 break;
+            case 'trending_tv_shows':
+                setTrendingTVShows(null)
+                res = await getTrendingMovies({...filter, showType: 'tv'})
+                setTrendingTVShows((prevState) => ({
+                    ...prevState,
+                    ...res
+                }))
+                break;
         
             default:
                 res = {}
@@ -43,8 +53,10 @@ const Dashboard = () => {
     }
     return (
         <>
+            <TrendingMovies trendingMovies={trendingMovies} onChangeTrendingMovies={(filter={}) => getMovieDatas('trending_movies', filter)} showType='movie'/>
             <UpcomingTrailers upComingMovies={upComingMovies} onChangeUpcomingMovies={(filter={}) => getMovieDatas('upcoming_movies', filter)}/>
-            <TrendingMovies trendingMovies={trendingMovies} onChangeTrendingMovies={(filter={}) => getMovieDatas('trending_movies', filter)}/>
+            <br/>
+            <TrendingMovies trendingMovies={trendingTVShows} onChangeTrendingMovies={(filter={}) => getMovieDatas('trending_tv_shows', filter)} showType='tv'/>
         </>
     )
 }

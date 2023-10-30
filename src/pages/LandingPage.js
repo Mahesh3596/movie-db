@@ -4,6 +4,7 @@ import Navbar from 'components/navbar/Navbar';
 import { AppContext } from 'contexts/AppContext';
 import Dashboard from './Dashboard';
 import Movie from './Movie';
+import Footer from 'components/footer/Footer';
 
 const LandingPage = (props) => {
     const {getTMDBConfigValue, showLoading} = useContext(AppContext)
@@ -23,6 +24,7 @@ const LandingPage = (props) => {
                     <Route key="dashboard" exact path='/' element={<Dashboard/>}/>
                     <Route key="dashboard" exact path='/movie' element={<Movie/>}/>
                 </Routes>
+            <Footer/>
             </div>
         </React.Fragment>
     )

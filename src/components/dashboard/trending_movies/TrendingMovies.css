@@ -2,13 +2,12 @@
     display: grid;
     grid-template-rows: auto 1fr;
     justify-items: center;
-    margin-top: 15px;
 }
 .trending-movie-list-container {
     display: flex;
     overflow-x: auto; 
     width: 80%;
-    min-height: 30vh;
+    min-height: 36vh;
     padding: 10px;
     background-image: url('../../../../public/assets/trending-movies-bg.png');
 }

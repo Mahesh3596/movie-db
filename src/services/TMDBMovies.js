@@ -1,6 +1,6 @@
 const { tmdb_bearer_token, tmdb_base_url } = require("config");
 
-const getTrendingMovies = async ({type='day', language='en-US'}) => {
+const getTrendingMovies = async ({showType='movie', type='day', language='en-US'}) => {
     const options = {
         method: 'GET',
         headers: {
@@ -9,7 +9,7 @@ const getTrendingMovies = async ({type='day', language='en-US'}) => {
         }
       };
       
-    return await fetch(`${tmdb_base_url}/trending/movie/${type}?language=${language}`, options)
+    return await fetch(`${tmdb_base_url}/trending/${showType}/${type}?language=${language}`, options)
     .then(response => response.json())
     .then(response => response)
     .catch(err => console.error(err));
