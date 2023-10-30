@@ -8,6 +8,7 @@
     overflow-x: auto; 
     width: 80%;
     min-height: 30vh;
+    padding: 10px;
     background-image: url('../../../../public/assets/trending-movies-bg.png');
 }
 .trending-movie-list {
@@ -17,7 +18,6 @@
     /* width: 80%; */
     /* min-height: 30vh; */
     gap: 20px;
-    padding: 10px;
 }
 .trending-movie-card {
     display: flex;
