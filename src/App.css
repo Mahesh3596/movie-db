@@ -1,6 +1,7 @@
 .app-container {
     height: 100vh;
     padding: 80px 0 0 0;
+    display: grid;
 }
 
 .txt-ellipsis-1 {
