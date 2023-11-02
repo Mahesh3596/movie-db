@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AppBar, Slide, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 import AppLogo from 'assets/app-logo.png'
 import NavMenu from './NavMenu';
+import { useNavigate } from 'react-router-dom';
 
 const menuList = [
     {
@@ -34,6 +35,7 @@ const menuList = [
 ]
 
 const Navbar = (props) => {
+    const navigate = useNavigate()
     const [menuAnchorEl, setMenuAnchorEl] = useState(null)
     const [menuObj, setMenuObj] = useState({})
     const onMenuHover = (e, menu) => {
@@ -52,6 +54,8 @@ const Navbar = (props) => {
                         <img
                             width="70px"
                             src={AppLogo}
+                            style={{cursor: 'pointer'}}
+                            onClick={() => navigate('/')}
                         />
                         <Typography 
                             sx={{display: 'flex', gap: '20px'}}

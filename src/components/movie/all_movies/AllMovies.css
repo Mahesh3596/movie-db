@@ -1,3 +1,38 @@
 .all-movies {
-    
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-self: center;
+}
+.all-movies-content-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.all-movie-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.all-img-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+    cursor: pointer;
+    background: url('../../../assets/trending-movies-ph.png');
+    background-size: 120px;
+}
+.all-img-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+
+.all-movies-filter-section {
+    height: 150px;
+    width: 100%;
+    /* padding: 10px; */
+    background: #B6D0E1;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 }

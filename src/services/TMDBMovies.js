@@ -50,6 +50,7 @@ const getAllMovies = async ({language='en-US', page=1}) => {
     }
   };
   
+  // return await fetch(`${tmdb_base_url}/discover/movie?with_original_language=ta&page=${page}`, options) //for tamil language movies
   return await fetch(`${tmdb_base_url}/movie/popular?language=${language}&page=${page}`, options)
     .then(response => response.json())
     .then(response => response)
