@@ -27,8 +27,23 @@ const getGenreList = async () => {
     .then(response => response)
     .catch(err => console.error(err));
 }
+const getLanguageList = async () => {
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: tmdb_bearer_token
+        }
+    };
+      
+    return await fetch(`${tmdb_base_url}/configuration/languages`, options)
+    .then(response => response.json())
+    .then(response => response)
+    .catch(err => console.error(err));
+}
 
 module.exports = {
     getConfigurationDetails,
-    getGenreList
+    getGenreList,
+    getLanguageList
 }

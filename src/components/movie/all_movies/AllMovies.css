@@ -8,7 +8,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .all-movie-card {
@@ -28,11 +28,18 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
 }
 
-.all-movies-filter-section {
-    height: 150px;
+.all-movies-title-section {
+    display: flex;
+    /* height: 150px; */
     width: 100%;
-    /* padding: 10px; */
+    padding: 10px 0;
     background: #B6D0E1;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+.all-movies-filter {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 10px;
 }

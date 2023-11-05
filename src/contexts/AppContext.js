@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "components/loader/Loader";
-import { getConfigurationDetails, getGenreList } from "services/TMDBConfig";
+import { getConfigurationDetails, getGenreList, getLanguageList } from "services/TMDBConfig";
 
 export const AppContext = React.createContext({})
 
@@ -17,10 +17,12 @@ export const AppContextProvider = ({children}) => {
             if (!tmdbConfig) {
                 const cdRes = await getConfigurationDetails()
                 const genreRes = await getGenreList()
+                const languageRes = await getLanguageList()
                 setTMDBConfig((prevState) => ({
                     ...prevState,
                     ...cdRes,
-                    ...genreRes
+                    ...genreRes,
+                    languages: languageRes
                 }))
             }
         } catch (err) {
