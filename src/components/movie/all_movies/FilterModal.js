@@ -21,19 +21,23 @@ const modalBoxStyle = {
     p: 3,
 }
 const menuLabelStyle = { p: '0 0 0 1px', opacity: 0.75, color: 'var(--app-bar-primary)', fontSize: '15px' }
-const initFilterObj = {ratingRange: [0, 10], genres: [], ratingVotes:0, language: null, from: null, to: null}
 
-const FilterModal = ({open=false, existingFilter=null, handleClose=()=>{}, onApply=()=>{}}) => {
+const FilterModal = ({open=false, existingFilter=null, existingSort=null, handleClose=()=>{}, onApply=()=>{}}) => {
+    const initFilterObj = {ratingRange: [0, 10], genres: [], ratingVotes:0, language: null, from: null, to: null}
+
     const {tmdbConfig} = useContext(AppContext)
     const [genreList, setGenreList] = useState([])
     const [languageList, setLanguageList] = useState([])
     const [filterObj, setFilterObj] = useState(existingFilter || initFilterObj)
+
     useEffect(() => {
         if (tmdbConfig?.genres && genreList.length < 1) setGenreList(tmdbConfig.genres)
         if (tmdbConfig?.languages && languageList.length < 1) setLanguageList(tmdbConfig.languages)
     }, [tmdbConfig])
+
     const onUserRatingChange = (event, newValue) => { setFilterObj(prevState => ({...prevState, ratingRange: newValue})) }
     const onUserVotesChange = (event, newValue) => { setFilterObj(prevState => ({...prevState, ratingVotes: newValue})) }
+
     const onGenreSelect = (genre) => {
         let newGenres=filterObj.genres
         if (isGenreSelected(genre)) {
@@ -45,7 +49,10 @@ const FilterModal = ({open=false, existingFilter=null, handleClose=()=>{}, onApp
         setFilterObj(prevState => ({...prevState, genres: newGenres}))
     }
     const isGenreSelected = (genre) => filterObj.genres.some(genreId => genreId === genre.id)
+    const isGenreChanged = () => JSON.stringify(initFilterObj) === JSON.stringify(filterObj) || JSON.stringify(existingFilter) === JSON.stringify(filterObj)
+
     const onReleaseDateChange = (key, newValue) => { setFilterObj(prevState => ({...prevState, [key]: newValue ? dayjs(newValue).format('YYYY-MM-DD') : ''})) }
+    
     const onModalClose = (event, reason) => {
         if(reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
             setFilterObj(existingFilter || initFilterObj)
@@ -120,9 +127,8 @@ const FilterModal = ({open=false, existingFilter=null, handleClose=()=>{}, onApp
                 <div style={{display: 'flex', justifyContent: 'flex-end', gap: 10}}>
                     <Button variant="outlined" size="small" onClick={onModalClose}>Cancel</Button>
                     <Button variant="contained" size="small" 
-                    onClick={() => onApply(filterObj)} 
-                    disabled={JSON.stringify(initFilterObj) === JSON.stringify(filterObj) || 
-                        JSON.stringify(existingFilter) === JSON.stringify(filterObj)}>
+                    onClick={() => onApply(filterObj, existingSort, false)} 
+                    disabled={isGenreChanged()}>
                             Apply
                     </Button>
                 </div>

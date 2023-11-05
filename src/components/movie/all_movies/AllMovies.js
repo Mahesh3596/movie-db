@@ -8,6 +8,7 @@ import AllMovieCard from "./AllMovieCard"
 import './AllMovies.css'
 import FilterModal from "./FilterModal"
 import ScrollTop from "./ScrollTop"
+import SortPopup from "./SortPopup"
 
 const AllMovies = (props) => {
     let loadMoreRef = useRef(null), pageNum=0;
@@ -32,10 +33,12 @@ const AllMovies = (props) => {
     useEffect(() => {
         if(pager.page != pageNum) {
             pageNum=pager.page;
-            getMovieData(getSearchParam() ? '/discover/movie' : '/movie/popular', {...getSearchParam(), page: pager.page}); 
+            getMovieData(isSearchParam() ? '/discover/movie' : '/movie/popular', {...getFilterParam(), sort: getSortParam(), page: pager.page}); 
         }
     }, [pager, searchParams])
-    const getSearchParam = () => {return JSON.parse(searchParams.get('filter'))}
+    const isSearchParam = () => { return searchParams.get('filter') || searchParams.get('sort') }
+    const getFilterParam = () => {return JSON.parse(searchParams.get('filter'))}
+    const getSortParam = () => {return searchParams.get('sort')}
 
     const getMovieData = async (url, filter) => {
         if (movieConfig?.total_pages && filter.page > movieConfig.total_pages) return
@@ -45,18 +48,17 @@ const AllMovies = (props) => {
             setMovieConfig(prevState => ({...prevState, page: res.page, total_pages: res.total_pages, total_results: res.total_results}))
         }
     }
-    const handleFilterClick = (event) => {
-        setFilterSortObj({open: true})
-    }
-    const handleFilterSortClose = () => {
-        setFilterSortObj({open: false})
-    }
-    const onApplyFilter = (filter, isClear=false) => {
-        setFilterSortObj({open: false})
-        if (isClear)
+    const handleFilterClick = () => { setFilterSortObj({filterOpen: true}) }
+    const handleSortClick = (event) => { setFilterSortObj({sortOpen: true, sortAnchorEl: event.currentTarget}) }
+    const handleFilterSortClose = () => { setFilterSortObj({filterOpen: false, sortOpen: false}) }
+    const onApplyFilterSort = (filter=null, sort=null, isClear=false) => {
+        setFilterSortObj({filterOpen: false})
+        if (isClear){
             navigate({pathname: '/movies'}, { replace: true })
-        else
-            navigate({pathname: '/movies', search: `?filter=${JSON.stringify(filter)}`}, { replace: true })
+        } else {
+            let search = `?${filter&&sort ? `&filter=${JSON.stringify(filter)}&sort=${sort}`: sort ? `sort=${sort}` : `filter=${JSON.stringify(filter)}`}`
+            navigate({pathname: '/movies', search: search}, { replace: true })
+        }
         navigate(0);
     }
     return (
@@ -68,12 +70,13 @@ const AllMovies = (props) => {
                     Popular Movies
                 </Typography>
                 <div style={{width: '20%'}} className="all-movies-filter">
-                    {getSearchParam() && <IconButton sx={{color: 'var(--app-bar-primary)', width: 80, height: 40, borderRadius: 0}} onClick={() => onApplyFilter({}, true)}>
+                    {isSearchParam() && <IconButton onClick={() => onApplyFilterSort(null, null, true)}
+                        sx={{color: 'var(--app-bar-primary)', width: 80, height: 40, borderRadius: 10}}>
                         <Typography>Clear </Typography>
                         <FilterAltOffOutlined/>
                     </IconButton>}
                     <IconButton sx={{color: 'var(--app-bar-primary)'}} onClick={handleFilterClick}><FilterAlt/></IconButton>
-                    <IconButton sx={{color: 'var(--app-bar-primary)'}}><Sort/></IconButton>  
+                    <IconButton sx={{color: 'var(--app-bar-primary)'}} onClick={handleSortClick}><Sort/></IconButton>  
                 </div>
             </div>
             <div style={{marginTop: '20px',  width: '100%', display: 'flex', flexDirection: 'column'}}>
@@ -93,8 +96,10 @@ const AllMovies = (props) => {
                 </div>
             </div>
             <ScrollTop {...props}/>           
-            <FilterModal open={filterSortObj.open} existingFilter={getSearchParam()} 
-                handleClose={handleFilterSortClose} onApply={onApplyFilter}/>
+            <FilterModal open={filterSortObj.filterOpen} existingFilter={getFilterParam()} existingSort={getSortParam()}
+                handleClose={handleFilterSortClose} onApply={onApplyFilterSort}/>
+            <SortPopup anchorEl={filterSortObj.sortAnchorEl} open={filterSortObj.sortAnchorEl && filterSortObj.sortOpen} 
+                handleClose={handleFilterSortClose} onApply={onApplyFilterSort} existingSort={getSortParam()}  existingFilter={getFilterParam()} />
         </div>
     )
 }

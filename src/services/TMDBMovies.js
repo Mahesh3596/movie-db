@@ -44,13 +44,16 @@ const getUpcomingMovieVideos = async ({movieId, language='en-US'}) => {
 const getAllMovies = async (urlEndpoint, filter) => {
   let URL = `${tmdb_base_url}${urlEndpoint}?`
   URL = URL+`page=${(filter?.page) ? filter.page : 1}&`
-  URL = URL+((filter.hasOwnProperty('language')) ? `with_original_language=${filter?.language || 'en'}&` : 'language=en-US&')
-  if (filter?.genres && filter.genres.length > 0) URL = URL+`with_genres=${filter.genres.join(',')}&`
-  if (filter?.ratingRange) URL = URL+`vote_average.gte=${filter.ratingRange[0]}&vote_average.lte=${filter.ratingRange[1]}&`
-  if (filter?.ratingVotes) URL = URL+`vote_count.gte=${filter.ratingVotes}&`
-  if (filter?.from) URL = URL+`primary_release_date.gte=${filter.from}&`
-  if (filter?.to) URL = URL+`primary_release_date.lte=${filter.to}&`
-  // console.log('URL >> ', URL)
+  if (urlEndpoint=='/discover/movie') {
+    if (filter.hasOwnProperty('language')) URL = URL+`with_original_language=${filter?.language || ''}&`
+    if (filter?.genres && filter.genres.length > 0) URL = URL+`with_genres=${filter.genres.join(',')}&`
+    if (filter?.ratingRange) URL = URL+`vote_average.gte=${filter.ratingRange[0]}&vote_average.lte=${filter.ratingRange[1]}&`
+    if (filter?.ratingVotes) URL = URL+`vote_count.gte=${filter.ratingVotes}&`
+    if (filter?.from) URL = URL+`primary_release_date.gte=${filter.from}&`
+    if (filter?.to) URL = URL+`primary_release_date.lte=${filter.to}&`
+    if (filter?.sort) URL = URL+`sort_by=${filter?.sort || 'popularity.desc'}`
+  }
+  console.log('URL >> ', URL)
 
   const options = {
     method: 'GET',
@@ -59,8 +62,7 @@ const getAllMovies = async (urlEndpoint, filter) => {
       Authorization: tmdb_bearer_token
     }
   };
-  
-  // return await fetch(`${tmdb_base_url}/discover/movie?with_original_language=ta&page=${page}`, options) //for tamil language movies
+
   return await fetch(URL, options)
     .then(response => response.json())
     .then(response => response)
