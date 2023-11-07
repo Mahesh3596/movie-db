@@ -11,7 +11,7 @@ import FilterModal from "./FilterModal"
 import ScrollTop from "./ScrollTop"
 import SortPopup from "./SortPopup"
 
-const AllMovies = ({pathURL='', ...props}) => {
+const AllMovies = ({pathURL='', filterURL='', ...props}) => {
     let loadMoreRef = useRef(null), pageNum=0;
     const pageReducer = (state, action) => {
         switch(action.type) {
@@ -35,7 +35,7 @@ const AllMovies = ({pathURL='', ...props}) => {
     useEffect(() => {
         if(pager.page != pageNum) {
             pageNum=pager.page;
-            getMovieData(isSearchParam() ? '/discover/movie' : pathURL, {...getFilterParam(), sort: getSortParam(), page: pager.page}); 
+            getMovieData(isSearchParam() ? filterURL : pathURL, {...getFilterParam(), sort: getSortParam(), page: pager.page}); 
         }
     }, [pager, searchParams])
     const isSearchParam = () => { return searchParams.get('filter') || searchParams.get('sort') }

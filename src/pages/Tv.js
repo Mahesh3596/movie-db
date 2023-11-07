@@ -5,7 +5,7 @@ const Tv = () => {
     const location = useLocation()
     const {pathname} = location
     return (
-        <AllMovies key={pathname} pathURL={pathname}/>
+        <AllMovies key={pathname} pathURL={pathname} filterURL='/discover/tv'/>
     )
 }
 

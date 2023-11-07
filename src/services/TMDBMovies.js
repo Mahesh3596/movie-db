@@ -41,10 +41,10 @@ const getUpcomingMovieVideos = async ({movieId, language='en-US'}) => {
     .then(response => response)
     .catch(err => console.error(err));
 }
-const getAllMovies = async (urlEndpoint, filter) => {
+const getAllMovies = async (urlEndpoint='', filter) => {
   let URL = `${tmdb_base_url}${urlEndpoint}?`
   URL = URL+`page=${(filter?.page) ? filter.page : 1}&`
-  if (urlEndpoint=='/discover/movie') {
+  if (urlEndpoint.includes('/discover')) {
     if (filter.hasOwnProperty('language')) URL = URL+`with_original_language=${filter?.language || ''}&`
     if (filter?.genres && filter.genres.length > 0) URL = URL+`with_genres=${filter.genres.join(',')}&`
     if (filter?.ratingRange) URL = URL+`vote_average.gte=${filter.ratingRange[0]}&vote_average.lte=${filter.ratingRange[1]}&`

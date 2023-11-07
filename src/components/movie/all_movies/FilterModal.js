@@ -119,7 +119,7 @@ const FilterModal = ({open=false, existingFilter=null, existingSort=null, handle
                         renderOption={(props, option) => <li {...props} key={option.english_name+option.iso_639_1}>{option.english_name}</li>}
                         renderInput={(params) => <TextField {...params} label="Select Language"/>}
                         onChange={(event, languageObj) => {
-                            if(languageObj) setFilterObj(prevState => ({...prevState, language: languageObj.iso_639_1}))
+                            setFilterObj(prevState => ({...prevState, language: languageObj?.iso_639_1 || null}))
                         }}
                     />
                 </div>
