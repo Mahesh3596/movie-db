@@ -7,7 +7,7 @@
     display: flex;
     overflow-x: auto; 
     width: 80%;
-    min-height: 36vh;
+    min-height: 34vh;
     padding: 10px;
     background-image: url('../../../../public/assets/trending-movies-bg.png');
 }
@@ -25,12 +25,20 @@
     flex-direction: column;
     position: relative;
 }
+.trending-movie-card-placeholder {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    -webkit-animation: blinker 2s linear infinite;
+    animation: blinker 2s linear infinite;
+}
 .trending-img-card {
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transition: 0.3s;
     cursor: pointer;
     background: url('../../../assets/trending-movies-ph.png');
+    transition: 0.3s;
 }
 .trending-img-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
@@ -45,4 +53,21 @@
     font-weight: 550;
     color: white !important;
     background: var(--app-color-primary) !important;
+}
+
+@-webkit-keyframes blinker {
+    0%,100%{
+        opacity: 0.0
+    }
+    50%{
+        opacity: 1.0
+    }
+}
+@keyframes blinker {
+    0%,100%{
+        opacity: 0.0
+    }
+    50%{
+        opacity: 1.0
+    }
 }

@@ -16,6 +16,13 @@
     flex-direction: column;
     position: relative;
 }
+.all-movie-card-placeholder {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    -webkit-animation: blinker 2s linear infinite;
+    animation: blinker 2s linear infinite;
+}
 .all-img-card {
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
@@ -42,4 +49,21 @@
     justify-content: end;
     align-items: center;
     padding-right: 10px;
+}
+
+@-webkit-keyframes blinker {
+    0%,100%{
+        opacity: 0.0
+    }
+    50%{
+        opacity: 1.0
+    }
+}
+@keyframes blinker {
+    0%,100%{
+        opacity: 0.0
+    }
+    50%{
+        opacity: 1.0
+    }
 }

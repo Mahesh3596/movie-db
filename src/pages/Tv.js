@@ -1,7 +1,7 @@
 import AllMovies from "components/movie/all_movies/AllMovies";
 import { useLocation } from "react-router-dom";
 
-const Movie = () => {
+const Tv = () => {
     const location = useLocation()
     const {pathname} = location
     return (
@@ -9,4 +9,4 @@ const Movie = () => {
     )
 }
 
-export default Movie;
+export default Tv;

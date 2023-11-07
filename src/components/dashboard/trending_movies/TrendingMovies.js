@@ -7,8 +7,10 @@ const TrendingMovies = ({trendingMovies=null, onChangeTrendingMovies=()=>{}, sho
     const [movieFilter, setMovieFilter] = useState({type: 'day', language: 'en-US'})
 
     const onTrendingMovieChange = (event, typeValue) => {
-        setMovieFilter(prevState => ({...prevState, type: typeValue}))
-        onChangeTrendingMovies({type: typeValue})
+        if(typeValue) {
+            setMovieFilter(prevState => ({...prevState, type: typeValue}))
+            onChangeTrendingMovies({type: typeValue})
+        }
     }
     return (
         <div className='trending-movies'>
@@ -30,6 +32,9 @@ const TrendingMovies = ({trendingMovies=null, onChangeTrendingMovies=()=>{}, sho
                 <div className='trending-movie-list'>
                     {trendingMovies?.results.length > 0 && trendingMovies?.results?.map(movie => (
                         <TrendingMovieCard movie={movie} key={'tm'+movie?.id}/>
+                    ))}
+                    {trendingMovies?.results.length <= 0 && Array.from({length: 10}, (_,i)=> ({})).map((movie,idx) => (
+                        <TrendingMovieCard movie={movie} key={'tm'+movie?.id+idx}/>
                     ))}
                 </div>
             </div>

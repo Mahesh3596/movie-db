@@ -9,20 +9,20 @@ const menuList = [
         title: 'Movies',
         id: 'menu-movies',
         menus: [
-            { title: 'Popular', path: '/movies' },
-            { title: 'Now Playing' },
-            { title: 'Upcoming' },
-            { title: 'Top Rated' }
+            { title: 'Popular', path: '/movie/popular' },
+            { title: 'Now Playing', path: '/movie/now_playing' },
+            { title: 'Upcoming', path: '/movie/upcoming' },
+            { title: 'Top Rated', path: '/movie/top_rated' }
         ]
     },
     {
         title: 'TV Shows',
         id: 'menu-tv-shows',
         menus: [
-            { title: 'Popular' },
-            { title: 'Airing Today' },
-            { title: 'On TV' },
-            { title: 'Top Rated' }
+            { title: 'Popular', path: '/tv/popular' },
+            { title: 'Airing Today', path: '/tv/airing_today' },
+            { title: 'On The Air', path: '/tv/on_the_air' },
+            { title: 'Top Rated', path: '/tv/top_rated' }
         ]
     },
     {
