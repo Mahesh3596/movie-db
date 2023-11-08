@@ -22,9 +22,9 @@ const LandingPage = (props) => {
             <Navbar/>
             <div className='app-container'>
                 <Routes>
-                    <Route key="dashboard" exact path='/' element={<Dashboard/>}/>
-                    <Route key="movie" exact path='/movie/*' element={<Movie/>}/>
-                    <Route key="tv" exact path='/tv/*' element={<Tv/>}/>
+                    <Route key="dashboard" exact path='/movie-db' element={<Dashboard/>}/>
+                    <Route key="movie" exact path='/movie-db/movie/*' element={<Movie/>}/>
+                    <Route key="tv" exact path='/movie-db/tv/*' element={<Tv/>}/>
                 </Routes>
             <Footer/>
             </div>

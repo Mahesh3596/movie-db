@@ -35,7 +35,7 @@ const AllMovies = ({pathURL='', filterURL='', ...props}) => {
     useEffect(() => {
         if(pager.page != pageNum) {
             pageNum=pager.page;
-            getMovieData(isSearchParam() ? filterURL : pathURL, {...getFilterParam(), sort: getSortParam(), page: pager.page}); 
+            getMovieData(isSearchParam() ? filterURL : '/'+pathURL.split('/').slice(2).join('/'), {...getFilterParam(), sort: getSortParam(), page: pager.page}); 
         }
     }, [pager, searchParams])
     const isSearchParam = () => { return searchParams.get('filter') || searchParams.get('sort') }
