@@ -10,7 +10,7 @@ const UpcomingTrailers = ({upComingMovies=null, onChangeUpcomingMovies=()=>{}}) 
     const [backdrop, setBackdrop] = useState('')
 
     useEffect(() => {
-        if (!imageBaseURL && tmdbConfig?.images?.base_url) setImageBaseURL(tmdbConfig.images.base_url)
+        if (!imageBaseURL && tmdbConfig?.images?.secure_base_url) setImageBaseURL(tmdbConfig.images.secure_base_url)
     }, [tmdbConfig])
     useEffect(() => {
         if (upComingMovies?.results) setBackdrop(`${imageBaseURL}/w1920_and_h427_multi_faces${upComingMovies?.results[0]?.backdrop_path}`)

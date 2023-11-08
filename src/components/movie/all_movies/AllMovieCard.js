@@ -9,7 +9,7 @@ const AllMovieCard = ({movie}) => {
     const {tmdbConfig} = useContext(AppContext)
     const [imageBaseURL, setImageBaseURL] = useState('')
     useEffect(() => {
-        if (!imageBaseURL && tmdbConfig?.images?.base_url) setImageBaseURL(tmdbConfig.images.base_url)
+        if (!imageBaseURL && tmdbConfig?.images?.secure_base_url) setImageBaseURL(tmdbConfig.images.secure_base_url)
     }, [tmdbConfig])
     return (
         imageBaseURL && movie?.id ? <div className='all-movie-card'>
