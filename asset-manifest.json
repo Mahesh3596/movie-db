@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/movie-db/static/css/main.65223dc7.css",
+    "main.js": "/movie-db/static/js/main.374b108f.js",
+    "static/js/787.3daf3fd3.chunk.js": "/movie-db/static/js/787.3daf3fd3.chunk.js",
+    "static/media/trending-movies-bg.png": "/movie-db/static/media/trending-movies-bg.75f261fcbc7ecae76063.png",
+    "static/media/app-logo.png": "/movie-db/static/media/app-logo.2c193d104877db3d2209.png",
+    "index.html": "/movie-db/index.html",
+    "main.65223dc7.css.map": "/movie-db/static/css/main.65223dc7.css.map",
+    "main.374b108f.js.map": "/movie-db/static/js/main.374b108f.js.map",
+    "787.3daf3fd3.chunk.js.map": "/movie-db/static/js/787.3daf3fd3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.65223dc7.css",
+    "static/js/main.374b108f.js"
+  ]
+}
