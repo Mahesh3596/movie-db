@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import TrendingMovies from 'components/dashboard/trending_movies/TrendingMovies';
 import UpcomingTrailers from 'components/dashboard/upcoming_trailers/UpcomingTrailers';
 import { AppContext } from 'contexts/AppContext';
-import { getTrendingMovies, getUpcomingMovies } from 'services/TMDBMovies';
+import TMDBMovies from 'services/TMDBMovies';
 const Dashboard = () => {
     const {showLoading} = useContext(AppContext)
     const [upComingMovies, setUpcomingMovies] = useState(null)
@@ -23,7 +23,7 @@ const Dashboard = () => {
         switch (section) {
             case 'trending_movies':
                 setTrendingMovies(null)
-                res = await getTrendingMovies(filter)
+                res = await TMDBMovies.getTrendingMovies(filter)
                 setTrendingMovies((prevState) => ({
                     ...prevState,
                     ...res
@@ -31,7 +31,7 @@ const Dashboard = () => {
                 break;
             case 'upcoming_movies':
                 setUpcomingMovies(null)
-                res = await getUpcomingMovies(filter)
+                res = await TMDBMovies.getUpcomingMovies(filter)
                 setUpcomingMovies((prevState) => ({
                     ...prevState,
                     ...res
@@ -39,7 +39,7 @@ const Dashboard = () => {
                 break;
             case 'trending_tv_shows':
                 setTrendingTVShows(null)
-                res = await getTrendingMovies({...filter, showType: 'tv'})
+                res = await TMDBMovies.getTrendingMovies({...filter, showType: 'tv'})
                 setTrendingTVShows((prevState) => ({
                     ...prevState,
                     ...res

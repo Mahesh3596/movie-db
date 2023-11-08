@@ -69,7 +69,7 @@ const getAllMovies = async (urlEndpoint='', filter) => {
     .catch(err => console.error(err));
 }
 
-module.exports = {
+export default {
     getTrendingMovies,
     getUpcomingMovies,
     getUpcomingMovieVideos,

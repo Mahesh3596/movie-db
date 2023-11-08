@@ -4,7 +4,7 @@ import { useInfiniteScroll } from "common/customHooks"
 import { getMovieTitleFromURL } from "common/utils"
 import { useEffect, useReducer, useRef, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { getAllMovies } from "services/TMDBMovies"
+import TMDBMovies from "services/TMDBMovies"
 import AllMovieCard from "./AllMovieCard"
 import './AllMovies.css'
 import FilterModal from "./FilterModal"
@@ -45,7 +45,7 @@ const AllMovies = ({pathURL='', filterURL='', ...props}) => {
     const getMovieData = async (url, filter) => {
         if (movieConfig?.total_pages && filter.page > movieConfig.total_pages) return
         setInfiniteLoad(true)
-        const res = await getAllMovies(url, filter)
+        const res = await TMDBMovies.getAllMovies(url, filter)
         if (res?.results) {
             setMovieList(prevState => [...prevState, ...res?.results])
             setMovieConfig(prevState => ({...prevState, page: res.page, total_pages: res.total_pages, total_results: res.total_results}))

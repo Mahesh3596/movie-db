@@ -3,7 +3,7 @@ import moment from "moment";
 import { useContext, useEffect, useState } from "react";
 import playIcon from 'assets/icon-trailer-play.png'
 import { AppContext } from "contexts/AppContext";
-import { getUpcomingMovieVideos } from "services/TMDBMovies";
+import TMDBMovies from "services/TMDBMovies";
 import TrailerPopup from "./TrailerPopup";
 
 const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => {
@@ -15,7 +15,7 @@ const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => 
     }, [movie])
     const getMovieData = async (filter) => {
         showLoading(true)
-        const res = await getUpcomingMovieVideos(filter)
+        const res = await TMDBMovies.getUpcomingMovieVideos(filter)
         let videoData = res?.results?.find((movie) => {if(movie.type === 'Trailer') return movie})
         videoData = typeof videoData != 'object' ? res?.results[0] : videoData
         setMovieVideoData(prevState => ({

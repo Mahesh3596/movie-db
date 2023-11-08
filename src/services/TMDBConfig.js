@@ -42,7 +42,7 @@ const getLanguageList = async () => {
     .catch(err => console.error(err));
 }
 
-module.exports = {
+export default {
     getConfigurationDetails,
     getGenreList,
     getLanguageList
