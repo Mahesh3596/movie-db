@@ -13,7 +13,7 @@ const TrendingMovieCard = ({movie}) => {
     }, [tmdbConfig])
     return (
         imageBaseURL && movie?.id ? <div className='trending-movie-card'>
-            <Rating rating={movie.vote_average}/>
+            <Rating rating={movie.vote_average} voteCount={movie.vote_count}/>
             {movie.poster_path ? <img 
                 className='trending-img-card'
                 loading='lazy'

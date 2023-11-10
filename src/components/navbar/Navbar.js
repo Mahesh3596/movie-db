@@ -55,7 +55,7 @@ const Navbar = (props) => {
                             width="70px"
                             src={AppLogo}
                             style={{cursor: 'pointer'}}
-                            onClick={() => navigate('/')}
+                            onClick={() => navigate('/movie-db')}
                         />
                         <Typography 
                             sx={{display: 'flex', gap: '20px'}}

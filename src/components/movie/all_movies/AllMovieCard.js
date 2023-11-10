@@ -13,7 +13,7 @@ const AllMovieCard = ({movie}) => {
     }, [tmdbConfig])
     return (
         imageBaseURL && movie?.id ? <div className='all-movie-card'>
-            <Rating rating={movie.vote_average}/>
+            <Rating rating={movie.vote_average} voteCount={movie.vote_count}/>
             {movie.poster_path ? <img 
                 className='all-img-card'
                 loading='lazy'

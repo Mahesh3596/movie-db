@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from 'components/navbar/Navbar';
 import { AppContext } from 'contexts/AppContext';
 import Dashboard from './Dashboard';
@@ -9,8 +9,11 @@ import Footer from 'components/footer/Footer';
 
 const LandingPage = (props) => {
     const {getTMDBConfigValue, showLoading} = useContext(AppContext)
+    const location = useLocation()
+    const navigate = useNavigate()
     useEffect(() => {
-      getConfigValues()  
+        getConfigValues()  
+        if (location.pathname === '/') navigate('/movie-db')
     }, [])
     const getConfigValues = async () => {
         showLoading(true)
