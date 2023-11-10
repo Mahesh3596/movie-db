@@ -6,6 +6,7 @@ import Dashboard from './Dashboard';
 import Movie from './Movie';
 import Tv from './Tv';
 import Footer from 'components/footer/Footer';
+import DetailsPage from './DetailsPage';
 
 const LandingPage = (props) => {
     const {getTMDBConfigValue, showLoading} = useContext(AppContext)
@@ -28,6 +29,7 @@ const LandingPage = (props) => {
                     <Route key="dashboard" exact path='/movie-db' element={<Dashboard/>}/>
                     <Route key="movie" exact path='/movie-db/movie/*' element={<Movie/>}/>
                     <Route key="tv" exact path='/movie-db/tv/*' element={<Tv/>}/>
+                    <Route key="details_page" exact path='/movie-db/:type/details/:id' element={<DetailsPage/>}/>
                 </Routes>
             <Footer/>
             </div>

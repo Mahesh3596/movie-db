@@ -53,6 +53,7 @@ const Dashboard = () => {
     }
     return (
         <>
+            <br/>
             <TrendingMovies trendingMovies={trendingMovies} onChangeTrendingMovies={(filter={}) => getMovieDatas('trending_movies', filter)} showType='movie'/>
             <UpcomingTrailers upComingMovies={upComingMovies} onChangeUpcomingMovies={(filter={}) => getMovieDatas('upcoming_movies', filter)}/>
             <br/>

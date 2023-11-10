@@ -4,15 +4,21 @@ import { AppContext } from "contexts/AppContext"
 import moment from "moment"
 import { useContext, useEffect, useState } from "react"
 import imgPlaceholder from "../../../assets/trending-movies-ph.png"
+import { useNavigate } from "react-router-dom"
 
 const AllMovieCard = ({movie}) => {
     const {tmdbConfig} = useContext(AppContext)
+    const navigate = useNavigate()
     const [imageBaseURL, setImageBaseURL] = useState('')
     useEffect(() => {
         if (!imageBaseURL && tmdbConfig?.images?.secure_base_url) setImageBaseURL(tmdbConfig.images.secure_base_url)
     }, [tmdbConfig])
+
+    const onMovieClick = () => {
+        navigate(`/movie-db/movie/details/${movie.id}`)
+    }
     return (
-        imageBaseURL && movie?.id ? <div className='all-movie-card'>
+        imageBaseURL && movie?.id ? <div className='all-movie-card' onClick={onMovieClick}>
             <Rating rating={movie.vote_average} voteCount={movie.vote_count}/>
             {movie.poster_path ? <img 
                 className='all-img-card'

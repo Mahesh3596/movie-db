@@ -1,0 +1,7 @@
+.movie-details-container {
+    width: 100%;
+}
+.primary-details-container {
+    width: 100vw;
+    /* overflow: hidden; */
+}

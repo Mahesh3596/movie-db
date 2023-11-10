@@ -67,6 +67,7 @@ const AllMovies = ({pathURL='', filterURL='', ...props}) => {
     }
     return (
         <div className="all-movies">
+            <br/>
             <div className="all-movies-title-section" id="movie-top-anchor">
                 <Typography variant="h6" 
                     fontWeight='bold' 
