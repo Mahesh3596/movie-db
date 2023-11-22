@@ -15,9 +15,11 @@ const DetailsPage = () =>{
 
     const getAllDetails = async () => {
         showLoading(true)
-        let urlEndpoint = type === 'tv' ? '/tv/${id}' : `/movie/${id}`
-        const res = await TMDBMovies.getDetails(urlEndpoint)
-        setDetails(res)
+        let urlDetailsEndpoint = type === 'tv' ? `/tv/${id}` : `/movie/${id}`
+        let urlCreditEndpoint = type === 'tv' ? `/tv/${id}/credits` : `/movie/${id}/credits`
+        const detailsRes = await TMDBMovies.getDetails(urlDetailsEndpoint+'?append_to_response=release_dates')
+        const creditsRes = await TMDBMovies.getCredits(urlCreditEndpoint)
+        setDetails({...detailsRes, cast: creditsRes.cast, crew: creditsRes.crew})
         showLoading(false)
     }
     return (<>

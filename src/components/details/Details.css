@@ -3,5 +3,42 @@
 }
 .primary-details-container {
     width: 100vw;
-    /* overflow: hidden; */
+}
+.details-thumbnail>img {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    width: 220px;
+    height: 330px;
+    background: url('../../assets/trending-movies-ph.png');
+    background-size: 220px;
+}
+.primary-details-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 25px;
+}
+.primary-details-action-btn {
+    background: #19466A;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+.certification {
+    display: inline-flex;
+    white-space: nowrap;
+    align-items: center;
+    padding: 0.06em 4px 0.15em!important;
+    border: 1px solid rgba(214, 214, 214, 0.6);
+    color: rgba(214, 214, 214, 0.6);
+    line-height: 1;
+    border-radius: 2px;
+    margin-right: 7px;
 }

@@ -69,7 +69,7 @@ const getAllMovies = async (urlEndpoint='', filter) => {
     .catch(err => console.error(err));
 }
 const getDetails = async (urlEndpoint='', filter={}) => {
-  let URL = `${tmdb_base_url}${urlEndpoint}?`
+  let URL = `${tmdb_base_url}${urlEndpoint}`
 
   const options = {
     method: 'GET',
@@ -84,11 +84,34 @@ const getDetails = async (urlEndpoint='', filter={}) => {
     .then(response => response)
     .catch(err => console.error(err));
 }
+const getCredits = async (urlEndpoint='', job='') => {
+  let URL = `${tmdb_base_url}${urlEndpoint}?`
+
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: tmdb_bearer_token
+    }
+  };
+
+  return await fetch(URL, options)
+    .then(response => response.json())
+    .then(response => {
+      if (job) {
+        response.crew.filter(({job})=> job ==='Director')
+      } else {
+        return response
+      }
+    })
+    .catch(err => console.error(err));
+}
 
 export default {
     getTrendingMovies,
     getUpcomingMovies,
     getUpcomingMovieVideos,
     getAllMovies,
-    getDetails
+    getDetails,
+    getCredits
 }

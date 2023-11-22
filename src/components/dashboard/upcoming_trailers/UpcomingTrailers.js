@@ -21,7 +21,7 @@ const UpcomingTrailers = ({upComingMovies=null, onChangeUpcomingMovies=()=>{}}) 
     }
     return (
         <div className='upcoming-trailers'>
-            <div style={{width: '80%', display: 'flex', justifyContent: 'center', overflowX: 'auto', padding: '10px', backgroundImage: `url(${backdrop})`}}>
+            <div style={{width: '81.2%', display: 'flex', justifyContent: 'center', overflowX: 'auto', marginTop: '5px', backgroundImage: `url(${backdrop})`}}>
                 <div style={{background: 'linear-gradient(to right, rgb(25 69 105 / 50%) 0%, rgb(219 235 244 / 50%) 100%', 
                     width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <div style={{alignSelf: 'left', width: '100%'}}>

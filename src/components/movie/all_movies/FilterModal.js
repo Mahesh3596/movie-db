@@ -17,7 +17,7 @@ const modalBoxStyle = {
     width: 500,
     bgcolor: 'background.paper',
     borderRadius: '10px',
-    boxShadow: 24,
+    // boxShadow: 24,
     p: 3,
 }
 const menuLabelStyle = { p: '0 0 0 1px', opacity: 0.75, color: 'var(--app-bar-primary)', fontSize: '15px' }
