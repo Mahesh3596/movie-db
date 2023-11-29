@@ -17,9 +17,14 @@ const DetailsPage = () =>{
         showLoading(true)
         let urlDetailsEndpoint = type === 'tv' ? `/tv/${id}` : `/movie/${id}`
         let urlCreditEndpoint = type === 'tv' ? `/tv/${id}/credits` : `/movie/${id}/credits`
+        let urlKeywordsEndpoint = type === 'tv' ? `/tv/${id}/keywords` : `/movie/${id}/keywords`
         const detailsRes = await TMDBMovies.getDetails(urlDetailsEndpoint+'?append_to_response=release_dates')
         const creditsRes = await TMDBMovies.getCredits(urlCreditEndpoint)
-        setDetails({...detailsRes, cast: creditsRes.cast, crew: creditsRes.crew})
+        const keywordsRes = await TMDBMovies.getDetails(urlKeywordsEndpoint)
+        setDetails({...detailsRes, 
+            cast: creditsRes.cast, 
+            crew: creditsRes.crew, 
+            keywords: keywordsRes.keywords})
         showLoading(false)
     }
     return (<>

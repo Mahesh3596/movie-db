@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import './Details.css'
 import PrimaryDetails from './PrimaryDetails';
 import { AppContext } from 'contexts/AppContext';
+import SecondaryDetails from './SecondaryDetails';
 
 const Details = ({details=null}) => {
     const {tmdbConfig} = useContext(AppContext)
@@ -12,6 +13,7 @@ const Details = ({details=null}) => {
 
     return (details && <div className='movie-details-container'>
         {details && imageBaseURL && <PrimaryDetails details={details} imageBaseURL={imageBaseURL}/>}
+        <SecondaryDetails details={details} imageBaseURL={imageBaseURL}/>
     </div>)
 }
 
