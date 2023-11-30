@@ -49,7 +49,7 @@ const SecondarySideDetails = ({details=null}) => {
                     sx={{margin: '2px', cursor: 'pointer', color: 'white', background: '#386f9a'}}/>)}
             </Stack>
         </div>
-        <hr style={{marginTop: '20px'}}/>
+        <hr style={{margin: '20px 20px 0 20px'}}/>
     </>)
 }
 
