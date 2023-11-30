@@ -3,7 +3,7 @@ import { Chip, Stack, Typography } from "@mui/material";
 import { AppContext } from "contexts/AppContext";
 import { useContext } from "react";
 
-const SecondarySideDetails = ({details=null}) => {
+const SecondarySideDetails = ({details=null, imageBaseURL='', showType=''}) => {
     const {tmdbConfig} = useContext(AppContext)
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -34,14 +34,24 @@ const SecondarySideDetails = ({details=null}) => {
             <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Original Language</Typography>
             <Typography sx={{fontSize: '14px'}}>{getLanguage(details?.original_language)}</Typography>
         </div>
-        <div style={{padding: '20px 20px 0 20px'}}>
+        {showType === 'movie' ? <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Budget</Typography>
             <Typography sx={{fontSize: '14px'}}>{details?.budget ? formatter.format(details.budget) : '-'}</Typography>
         </div>
+        :
         <div style={{padding: '20px 20px 0 20px'}}>
+            <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Network</Typography>
+            {details?.networks.length > 0 ? details.networks.map(network => <img width="50px" src={`${imageBaseURL}/w92${network.logo_path}`}/>) : '-'}
+        </div>}
+        {showType === 'movie' ? <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Revenue</Typography>
             <Typography sx={{fontSize: '14px'}}>{details?.revenue ? formatter.format(details.revenue) : '-'}</Typography>
         </div>
+        :
+        <div style={{padding: '20px 20px 0 20px'}}>
+            <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Type</Typography>
+            <Typography sx={{fontSize: '14px'}}>{details?.type || '-'}</Typography>
+        </div>}
         <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '16px'}} fontWeight='bold'>Keywords</Typography>
             <Stack direction="row" spacing={0} sx={{flexWrap: 'wrap', paddingTop: '5px'}}>

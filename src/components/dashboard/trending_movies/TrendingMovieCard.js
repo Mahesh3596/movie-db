@@ -6,7 +6,7 @@ import Rating from "./Rating"
 import imgPlaceholder from "../../../assets/trending-movies-ph.png"
 import { useNavigate } from "react-router-dom"
 
-const TrendingMovieCard = ({movie}) => {
+const TrendingMovieCard = ({movie=null, showType=''}) => {
     const {tmdbConfig} = useContext(AppContext)
     const navigate = useNavigate()
     const [imageBaseURL, setImageBaseURL] = useState('')
@@ -15,7 +15,9 @@ const TrendingMovieCard = ({movie}) => {
     }, [tmdbConfig])
 
     const onMovieClick = () => {
-        navigate(`/movie-db/movie/details/${movie.id}`)
+        if (!movie) return
+        if (showType==='movie') navigate(`/movie-db/movie/details/${movie.id}`)
+        if (showType==='tv') navigate(`/movie-db/tv/details/${movie.id}`)
     }
     return (
         imageBaseURL && movie?.id ? <div className='trending-movie-card' onClick={onMovieClick}>

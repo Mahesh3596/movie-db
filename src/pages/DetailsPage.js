@@ -24,11 +24,11 @@ const DetailsPage = () =>{
         setDetails({...detailsRes, 
             cast: creditsRes.cast, 
             crew: creditsRes.crew, 
-            keywords: keywordsRes.keywords})
+            keywords: keywordsRes?.keywords || keywordsRes?.results || []})
         showLoading(false)
     }
     return (<>
-        {details && <Details details={details}/>}
+        {details && <Details details={details} showType={type}/>}
     </>)
 }
 

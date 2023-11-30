@@ -31,10 +31,10 @@ const TrendingMovies = ({trendingMovies=null, onChangeTrendingMovies=()=>{}, sho
             <div className="trending-movie-list-container">
                 <div className='trending-movie-list'>
                     {trendingMovies?.results.length > 0 && trendingMovies?.results?.map(movie => (
-                        <TrendingMovieCard movie={movie} key={'tm'+movie?.id}/>
+                        <TrendingMovieCard movie={movie} key={'tm'+movie?.id} showType={showType}/>
                     ))}
                     {trendingMovies?.results.length <= 0 && Array.from({length: 10}, (_,i)=> ({})).map((movie,idx) => (
-                        <TrendingMovieCard movie={movie} key={'tm'+movie?.id+idx}/>
+                        <TrendingMovieCard movie={movie} key={'tm'+movie?.id+idx} showType={showType}/>
                     ))}
                 </div>
             </div>

@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import moment from "moment";
 import PrimaryDetailsAction from "./PrimaryDetailsAction";
 
-const PrimaryDetails = ({details=null, imageBaseURL=''}) => {
+const PrimaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
     function getCountry () {
         return details?.production_companies?.sort((a,b) => a.id - b.id)[0]?.origin_country
     }
@@ -10,7 +10,9 @@ const PrimaryDetails = ({details=null, imageBaseURL=''}) => {
         return details?.release_dates?.results.filter(({iso_3166_1}) => iso_3166_1 === country)[0]?.release_dates[0]?.certification
     }
     function getDirector () {
-        return details?.crew.filter(({job}) => job === 'Director')?.[0]?.name || 'NA'
+        return showType === 'movie' ? 
+            details?.crew.filter(({job}) => job === 'Director')?.[0]?.name || 'NA' : 
+            details?.crew.filter(({known_for_department}) => known_for_department === 'Writing')?.[0]?.name || 'NA'
     }
     function getRoles (person) {
         return details?.crew.filter(({name}) => name === person)?.map(role => role.job).join(', ')
@@ -23,12 +25,12 @@ const PrimaryDetails = ({details=null, imageBaseURL=''}) => {
                         <img
                             loading='lazy'
                             src={`${imageBaseURL}/w220_and_h330_face${details.poster_path}`}
-                            alt={details.title}
+                            alt={details?.title || details?.original_name}
                         />
                     </div>
                     <div className="primary-details-section">
                         <Typography sx={{color: 'white', paddingBottom: '5px'}} variant="h5" fontWeight="bold">
-                            {details.title} <span style={{fontWeight: 'lighter',opacity: 0.8}}>{'('+(moment(details.release_date)).year()+')'}</span>
+                            {details?.title || details?.original_name} <span style={{fontWeight: 'lighter',opacity: 0.8}}>{'('+(moment(details.release_date)).year()+')'}</span>
                         </Typography>
                         <div style={{display: 'flex', gap: '10px'}}>
                             <Typography sx={{color: 'white'}}>
@@ -36,7 +38,7 @@ const PrimaryDetails = ({details=null, imageBaseURL=''}) => {
                                 {moment(details.release_date).format('MMM DD, YYYY')+`${getCountry() ? ` (${getCountry()})` : ''}`}
                             </Typography>
                             <Typography sx={{color: 'white'}}><li>{details?.genres?.map(genre => genre.name).join(', ')}</li></Typography>
-                            <Typography sx={{color: 'white'}}><li>{moment.duration(details?.runtime, 'minutes').hours()+'h '+moment.duration(details?.runtime, 'minutes').minutes()+'m'}</li></Typography>
+                            {showType !== 'tv' && <Typography sx={{color: 'white'}}><li>{moment.duration(details?.runtime, 'minutes').hours()+'h '+moment.duration(details?.runtime, 'minutes').minutes()+'m'}</li></Typography>}
                         </div>
                         <PrimaryDetailsAction details={details}/>
                         <span style={{color: 'silver', fontStyle: 'italic'}}>{details?.tagline}</span>
