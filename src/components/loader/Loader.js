@@ -5,7 +5,7 @@ import './Loader.css'
 const Loader = () => {
     return (
         <div className="loader-container">
-            <div style={{position: 'relative'}}>
+            <div style={{position: 'relative', paddingRight: '100px'}}>
                 <img className='loader-reel'
                     src={loaderReel} 
                     style={{position: 'absolute', top: -40, left: 10}}/>

@@ -11,10 +11,10 @@ const SecondarySideDetails = ({details=null}) => {
     })
     const getLanguage = (language='') => {
         let orgLang=null;
-        if (language && tmdbConfig.languages.length > 0) {
+        if (language && tmdbConfig?.languages.length > 0) {
             orgLang = tmdbConfig.languages.filter(lang => lang.iso_639_1 === language)
         }
-        return orgLang.length > 0 ? orgLang[0].name : '-'
+        return orgLang?.length > 0 ? orgLang[0].name : '-'
     }
     return (<>
         <div style={{display: 'flex', gap: 10, padding: '20px 20px 0 20px', opacity: 0.7}}>

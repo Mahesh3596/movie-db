@@ -28,7 +28,7 @@ const DetailsPage = () =>{
         showLoading(false)
     }
     return (<>
-        <Details details={details}/>
+        {details && <Details details={details}/>}
     </>)
 }
 
