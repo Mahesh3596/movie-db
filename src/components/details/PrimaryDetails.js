@@ -12,19 +12,19 @@ const PrimaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
     function getDirector () {
         return showType === 'movie' ? 
             details?.crew.filter(({job}) => job === 'Director')?.[0]?.name || 'NA' : 
-            details?.crew.filter(({known_for_department}) => known_for_department === 'Writing')?.[0]?.name || 'NA'
+            details?.crew.filter(({job}) => job === 'Producer')?.[0]?.name || 'NA'
     }
     function getRoles (person) {
         return details?.crew.filter(({name}) => name === person)?.map(role => role.job).join(', ')
     }
     return (<div className="primary-details-container">
-        <div style={{backgroundImage: `url(${imageBaseURL}/w1920_and_h427_multi_faces${details.backdrop_path})`}}>
-            <div style={{backgroundColor: 'rgb(0 17 30 / 75%)', height: '400px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <div style={{backgroundImage: `url(${imageBaseURL}/w1920_and_h800_multi_faces${details.backdrop_path})`, backgroundSize: 'cover'}}>
+            <div style={{backgroundColor: 'rgb(0 17 30 / 75%)', height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <div style={{width: '80%', display: 'flex'}}>
                     <div className="details-thumbnail">
                         <img
                             loading='lazy'
-                            src={`${imageBaseURL}/w220_and_h330_face${details.poster_path}`}
+                            src={`${imageBaseURL}/w500${details.poster_path}`}
                             alt={details?.title || details?.original_name}
                         />
                     </div>

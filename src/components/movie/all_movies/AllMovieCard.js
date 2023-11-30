@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react"
 import imgPlaceholder from "../../../assets/trending-movies-ph.png"
 import { useNavigate } from "react-router-dom"
 
-const AllMovieCard = ({movie}) => {
+const AllMovieCard = ({movie=null, showType=''}) => {
     const {tmdbConfig} = useContext(AppContext)
     const navigate = useNavigate()
     const [imageBaseURL, setImageBaseURL] = useState('')
@@ -15,7 +15,9 @@ const AllMovieCard = ({movie}) => {
     }, [tmdbConfig])
 
     const onMovieClick = () => {
-        navigate(`/movie-db/movie/details/${movie.id}`)
+        if (!movie) return
+        if (showType === 'movie') navigate(`/movie-db/movie/details/${movie.id}`)
+        if (showType === 'tv') navigate(`/movie-db/tv/details/${movie.id}`)
     }
     return (
         imageBaseURL && movie?.id ? <div className='all-movie-card' onClick={onMovieClick}>

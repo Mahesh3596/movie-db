@@ -1,7 +1,7 @@
 import { FilterAlt, FilterAltOffOutlined, Sort } from "@mui/icons-material"
 import { IconButton, Typography } from "@mui/material"
 import { useInfiniteScroll } from "common/customHooks"
-import { getMovieTitleFromURL } from "common/utils"
+import { getAllMovieTitleFromURL, getAllMovieTypeFromURL } from "common/utils"
 import { useEffect, useReducer, useRef, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import TMDBMovies from "services/TMDBMovies"
@@ -72,7 +72,7 @@ const AllMovies = ({pathURL='', filterURL='', ...props}) => {
                 <Typography variant="h6" 
                     fontWeight='bold' 
                     sx={{color: 'var(--app-bar-primary)', paddingLeft: '15px', width: '80%', alignSelf: 'center'}}>
-                    {getMovieTitleFromURL(pathURL)}
+                    {getAllMovieTitleFromURL(pathURL)}
                 </Typography>
                 <div style={{width: '20%'}} className="all-movies-filter">
                     {isSearchParam() && <IconButton onClick={() => onApplyFilterSort(null, null, true)}
@@ -86,7 +86,7 @@ const AllMovies = ({pathURL='', filterURL='', ...props}) => {
             </div>
             <div style={{marginTop: '20px',  width: '100%', display: 'flex', flexDirection: 'column'}}>
                 <div className="all-movies-content-section">
-                    {movieList.map((movie, idx) => <AllMovieCard movie={movie} key={'all-'+movie?.id+idx}/>)}
+                    {movieList.map((movie, idx) => <AllMovieCard movie={movie} key={'all-'+movie?.id+idx} showType={getAllMovieTypeFromURL(pathURL)}/>)}
                     {infiniteLoad && Array.from({length: 20},(_,i)=>({})).map((movie, idx) => <AllMovieCard movie={movie} key={'all-'+movie?.id+idx}/>)}
                 </div>
                 <div style={{display: 'flex', justifyContent: 'center', marginTop: '10px'}}>

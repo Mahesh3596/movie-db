@@ -41,7 +41,7 @@ const SecondarySideDetails = ({details=null, imageBaseURL='', showType=''}) => {
         :
         <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Network</Typography>
-            {details?.networks.length > 0 ? details.networks.map(network => <img width="50px" src={`${imageBaseURL}/w92${network.logo_path}`}/>) : '-'}
+            {details?.networks.length > 0 ? details.networks.map(network => <img width="50px" key={network.id} src={`${imageBaseURL}/w92${network.logo_path}`}/>) : '-'}
         </div>}
         {showType === 'movie' ? <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Revenue</Typography>
