@@ -59,3 +59,20 @@
     color: black !important;
     background: none !important;
 }
+.recommn-release-hidden {
+    display: none;
+    background: #ffffffa7;
+    border-radius: 0 0 10px 10px;
+    padding: 7.5px 15px;
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    width: 220px;
+}
+.recommn-img {
+    cursor: pointer;
+    position: relative;
+}
+.recommn-img:hover .recommn-release-hidden {
+    display: flex; align-items: center;
+}

@@ -96,6 +96,7 @@ const MediaList = ({details=null, imageBaseURL=''}) => {
         >
             {mediaList && <tab.tabpanelComp medias={mediaList} imageBaseURL={imageBaseURL}/>}
         </div>)}
+        <hr style={{margin: '20px 0'}}/>
     </div>)
 }
 

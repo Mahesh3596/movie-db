@@ -15,7 +15,7 @@ const Rating = ({rating=0, voteCount=0, ...props}) => {
         return formatted + ' votes'
     }
     return (
-        <>
+        <div style={{zIndex: 1}}>
         <div style={{
             position: "absolute", width: '100px', height: '25px', 
             borderRadius: '20px', 
@@ -59,7 +59,7 @@ const Rating = ({rating=0, voteCount=0, ...props}) => {
                 </Typography>
             </Box>
         </Box>
-        </>
+        </div>
     )
 }
 
