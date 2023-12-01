@@ -8,7 +8,7 @@ const ProfileCard = ({info=null, imageBaseURL=''}) => {
                 {info.profile_path ? <img
                     loading="lazy"
                     style={{width: '100%'}}
-                    src={`${imageBaseURL}/w154${info.profile_path}`}
+                    src={`${imageBaseURL}w154${info.profile_path}`}
                 />
                 :
                 <img

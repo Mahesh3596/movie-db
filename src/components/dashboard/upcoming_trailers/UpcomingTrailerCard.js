@@ -51,8 +51,8 @@ const UpcomingTrailerCard = ({movie, imageBaseURL, onThumbnailHover=()=>{}}) => 
                 loading="lazy"
                 style={{maxWidth: "355px", maxHeight: "200px", 
                     transition: '0.3s', cursor: 'pointer', borderRadius: '10px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.5)'}}
-                src={`${imageBaseURL}/w355_and_h200_multi_faces${movie.backdrop_path}`}
-                srcSet={`${imageBaseURL}/w355_and_h200_multi_faces${movie.backdrop_path} 1x, ${imageBaseURL}/w710_and_h400_multi_faces${movie.backdrop_path} 2x`}
+                src={`${imageBaseURL}w355_and_h200_multi_faces${movie.backdrop_path}`}
+                srcSet={`${imageBaseURL}w355_and_h200_multi_faces${movie.backdrop_path} 1x, ${imageBaseURL}w710_and_h400_multi_faces${movie.backdrop_path} 2x`}
                 alt={movie.title}
             />
             <div style={{position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '80%', cursor: 'pointer'}}>

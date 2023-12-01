@@ -13,11 +13,11 @@ const UpcomingTrailers = ({upComingMovies=null, onChangeUpcomingMovies=()=>{}}) 
         if (!imageBaseURL && tmdbConfig?.images?.secure_base_url) setImageBaseURL(tmdbConfig.images.secure_base_url)
     }, [tmdbConfig])
     useEffect(() => {
-        if (upComingMovies?.results) setBackdrop(`${imageBaseURL}/w1920_and_h427_multi_faces${upComingMovies?.results[0]?.backdrop_path}`)
+        if (upComingMovies?.results) setBackdrop(`${imageBaseURL}w1920_and_h427_multi_faces${upComingMovies?.results[0]?.backdrop_path}`)
     }, [imageBaseURL, upComingMovies])
 
     const onThumbnailHover = (backdrop_path) => {
-        setBackdrop(`${imageBaseURL}/w1920_and_h427_multi_faces${backdrop_path}`)
+        setBackdrop(`${imageBaseURL}w1920_and_h427_multi_faces${backdrop_path}`)
     }
     return (
         <div className='upcoming-trailers'>

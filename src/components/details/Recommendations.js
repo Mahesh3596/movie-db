@@ -34,7 +34,7 @@ const Recommendations = ({details=null, imageBaseURL='', showType=''}) => {
             {recommnList.length <= 0 && <Typography>We don't have enough data to suggest any movies.</Typography>}
             {recommnList.length > 0 && recommnList.map(recommn => <div key={recommn.id} onClick={() => onItemClick(recommn)}>
                 <div className="recommn-img">
-                    {recommn?.backdrop_path ? <img width="250px" src={`${imageBaseURL}/w300${recommn.backdrop_path}`} 
+                    {recommn?.backdrop_path ? <img width="250px" src={`${imageBaseURL}w300${recommn.backdrop_path}`} 
                         style={{borderRadius: '10px'}}/>
                     :
                     <img width="250px" src={imgPlaceholder} 

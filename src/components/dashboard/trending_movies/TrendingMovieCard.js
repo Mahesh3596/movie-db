@@ -26,8 +26,8 @@ const TrendingMovieCard = ({movie=null, showType=''}) => {
                 className='trending-img-card'
                 loading='lazy'
                 style={{width: "150px", maxHeight: "250px"}}
-                src={`${imageBaseURL}/w220_and_h330_face${movie.poster_path}`}
-                srcSet={`${imageBaseURL}/w220_and_h330_face${movie.poster_path} 1x, ${imageBaseURL}/w440_and_h660_face${movie.poster_path} 2x`} 
+                src={`${imageBaseURL}w220_and_h330_face${movie.poster_path}`}
+                srcSet={`${imageBaseURL}w220_and_h330_face${movie.poster_path} 1x, ${imageBaseURL}w440_and_h660_face${movie.poster_path} 2x`} 
                 alt={movie.title}/>
             :
             <img 

@@ -10,8 +10,8 @@ const MostPopular = ({medias=[], imageBaseURL='', onItemClick=()=>{}}) => {
             <img loading="lazy" width="450px" height="100%" src={`https://img.youtube.com/vi/${medias.videos[0].key}/0.jpg`} style={{objectFit: 'none'}}/>
             <Box sx={{position: 'absolute', top: '42%', left: '43%', color: 'white'}}><PlayArrow sx={{fontSize: '50px', background: '#0000008f', borderRadius: '50px'}}/></Box>
         </div>}
-        {medias?.backdrops && <img loading="lazy" height="100%" src={`${imageBaseURL}/w780${medias.backdrops[0].file_path}`} onClick={() => onItemClick('image', medias.backdrops[0])}/>}
-        {medias?.posters && <img loading="lazy" height="100%" src={`${imageBaseURL}/w342${medias.posters[0].file_path}`} onClick={() => onItemClick('image', medias.posters[0])}/>}
+        {medias?.backdrops && <img loading="lazy" height="100%" src={`${imageBaseURL}w780${medias.backdrops[0].file_path}`} onClick={() => onItemClick('image', medias.backdrops[0])}/>}
+        {medias?.posters && <img loading="lazy" height="100%" src={`${imageBaseURL}w342${medias.posters[0].file_path}`} onClick={() => onItemClick('image', medias.posters[0])}/>}
     </div>)
 }
 const MediaVideos = ({medias=[], imageBaseURL='', onItemClick=()=>{}}) => {
@@ -24,12 +24,12 @@ const MediaVideos = ({medias=[], imageBaseURL='', onItemClick=()=>{}}) => {
 }
 const MediaBackdrops = ({medias=[], imageBaseURL='', onItemClick=()=>{}}) => {
     return (<div style={{width: '100%', height: '250px', overflow: 'auto', whiteSpace: 'nowrap', borderRadius: '10px', paddingBottom: '10px', display: 'flex'}}>
-        {medias?.backdrops && medias.backdrops.map(backdrop => <img loading="lazy" key={backdrop.file_path} height="100%" src={`${imageBaseURL}/w780${backdrop.file_path}`} onClick={() => onItemClick('image', backdrop)}/>)}
+        {medias?.backdrops && medias.backdrops.map(backdrop => <img loading="lazy" key={backdrop.file_path} height="100%" src={`${imageBaseURL}w780${backdrop.file_path}`} onClick={() => onItemClick('image', backdrop)}/>)}
     </div>)
 }
 const MediaPosters = ({medias=[], imageBaseURL='', onItemClick=()=>{}}) => {
     return (<div style={{width: '100%', height: '250px', overflow: 'auto', whiteSpace: 'nowrap', borderRadius: '10px', paddingBottom: '10px', display: 'flex'}}>
-        {medias?.posters && medias.posters.map(poster => <img loading="lazy" key={poster.file_path} height="100%" src={`${imageBaseURL}/w342${poster.file_path}`} onClick={() => onItemClick('image', poster)}/>)}
+        {medias?.posters && medias.posters.map(poster => <img loading="lazy" key={poster.file_path} height="100%" src={`${imageBaseURL}w342${poster.file_path}`} onClick={() => onItemClick('image', poster)}/>)}
     </div>)
 }
 
@@ -62,7 +62,7 @@ const MediaList = ({details=null, imageBaseURL=''}) => {
         }
     }
     const openImageInNewTab = (mediaObj) => {
-        window.open(`${imageBaseURL}/original${mediaObj.file_path}`, '_blank', 'noopener,noreferrer');
+        window.open(`${imageBaseURL}original${mediaObj.file_path}`, '_blank', 'noopener,noreferrer');
     }
     const onMediaClick = (type='image', mediaObj) => {
         if (type === 'video') showTrailerPopup(mediaObj)
