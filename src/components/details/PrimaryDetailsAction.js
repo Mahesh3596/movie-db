@@ -1,9 +1,30 @@
 import { Bookmark, Favorite, PlayArrow, PlaylistAdd, Star } from "@mui/icons-material";
 import { Box, CircularProgress, Typography } from "@mui/material";
+import TrailerPopup from "components/dashboard/upcoming_trailers/TrailerPopup";
+import { useEffect, useState } from "react";
 
 const PrimaryDetailsAction = ({details=null, ...props}) => {
     let rating = details.vote_average
+    const [trailerObj, setTrailerObj] = useState(null)
+    const [trailerPopupObj, setTrailerPopupObj] = useState({open: false, trailerObj: {}})
+
+    useEffect(() => {
+        if (details?.id && details?.videos) {
+            const trailer = details?.videos?.results?.filter(vid => vid.type.toLowerCase() === 'trailer')[0]
+            setTrailerObj(trailer || details?.videos?.results[0])
+        }
+    }, [details])
+
     const getRatingRounded = () => {return Math.round(rating * 10) / 10}
+    const onHandlePopupClose = () => {
+        setTrailerPopupObj(prevState => ({...prevState, open: false, trailerObj: {}}))
+    }
+    const showTrailerPopup = () => {
+        if (trailerPopupObj.open == false) {
+            setTrailerPopupObj(prevState => ({...prevState, open: true, trailerObj: trailerObj}))
+        }
+    }
+
     return (
         <div style={{padding: '20px 0', display: 'flex', gap: 20, alignItems: 'center'}}>
             <div style={{display: 'flex', alignItems: 'center'}}>
@@ -45,9 +66,12 @@ const PrimaryDetailsAction = ({details=null, ...props}) => {
             <Box className='primary-details-action-btn'><Favorite fontSize="10px"/></Box>
             <Box className='primary-details-action-btn'><Bookmark fontSize="10px"/></Box>
             <Box className='primary-details-action-btn'><Star fontSize="10px"/></Box>
-            <div style={{display: "flex", alignItems: 'center', color: 'white', gap: 5, cursor: 'pointer', fontWeight: '600'}}>
-                <PlayArrow/> Play Trailer
-            </div>
+            {trailerObj && <div style={{display: "flex", alignItems: 'center', color: 'white', gap: 5, cursor: 'pointer', fontWeight: '600'}} onClick={showTrailerPopup}>
+                <PlayArrow/> Play {trailerObj?.type}
+            </div>}
+            <TrailerPopup showTrailer={trailerPopupObj.open} 
+                trailerObj={trailerPopupObj.trailerObj} 
+                handleClose={onHandlePopupClose}/>
         </div>
     )
 }

@@ -19,13 +19,16 @@ const DetailsPage = () =>{
         let urlDetailsEndpoint = type === 'tv' ? `/tv/${id}` : `/movie/${id}`
         let urlCreditEndpoint = type === 'tv' ? `/tv/${id}/credits` : `/movie/${id}/credits`
         let urlKeywordsEndpoint = type === 'tv' ? `/tv/${id}/keywords` : `/movie/${id}/keywords`
-        const detailsRes = await TMDBMovies.getDetails(urlDetailsEndpoint+'?append_to_response=release_dates')
+        let urlReleaseEndpoint = type === 'tv' ? `/tv/${id}/content_ratings` : `/movie/${id}/release_dates`
+        const detailsRes = await TMDBMovies.getDetails(urlDetailsEndpoint+'?append_to_response=videos,images')
         const creditsRes = await TMDBMovies.getCredits(urlCreditEndpoint)
         const keywordsRes = await TMDBMovies.getDetails(urlKeywordsEndpoint)
+        const releaseRes = await TMDBMovies.getDetails(urlReleaseEndpoint)
         setDetails({...detailsRes, 
             cast: creditsRes.cast, 
             crew: creditsRes.crew, 
-            keywords: keywordsRes?.keywords || keywordsRes?.results || []})
+            keywords: keywordsRes?.keywords || keywordsRes?.results || [],
+            release: releaseRes?.results?.filter((rel) => rel.iso_3166_1==='IN')?.[0] || releaseRes?.results?.[0] || []})
         showLoading(false)
     }
     return (<>

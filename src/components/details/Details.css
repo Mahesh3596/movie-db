@@ -76,3 +76,4 @@
 .recommn-img:hover .recommn-release-hidden {
     display: flex; align-items: center;
 }
+.media-tab-panel>div>img { cursor: pointer; }

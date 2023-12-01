@@ -7,7 +7,7 @@ const SecondaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
     return (<div style={{width: '100vw', display: 'flex', justifyContent: 'center'}}>
         <div style={{width: '60%'}}>
             <TopCastList castList={details?.cast} imageBaseURL={imageBaseURL}/>
-            <MediaList details={details} imageBaseURL={imageBaseURL}/>
+            <MediaList key={details?.id} details={details} imageBaseURL={imageBaseURL}/>
             <Recommendations details={details} imageBaseURL={imageBaseURL} showType={showType}/>
         </div>
         <div style={{width: '20%'}}>

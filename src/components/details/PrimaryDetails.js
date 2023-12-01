@@ -4,15 +4,15 @@ import PrimaryDetailsAction from "./PrimaryDetailsAction";
 
 const PrimaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
     function getCountry () {
-        return details?.production_companies?.sort((a,b) => a.id - b.id)[0]?.origin_country
+        return details?.release?.iso_3166_1 || ''
     }
-    function getCertificate (country) {
-        return details?.release_dates?.results.filter(({iso_3166_1}) => iso_3166_1 === country)[0]?.release_dates[0]?.certification
+    function getCertificate () {
+        if (showType === 'movie') return details?.release?.release_dates?.[0]?.certification || ''
+        if (showType === 'tv') return details?.release?.rating || ''
     }
-    function getDirector () {
-        return showType === 'movie' ? 
-            details?.crew.filter(({job}) => job === 'Director')?.[0]?.name || 'NA' : 
-            details?.crew.filter(({job}) => job === 'Producer')?.[0]?.name || 'NA'
+    function getTopCrew () {
+        const roles = details?.crew.sort((a,b) => b.popularity - a.popularity).slice(0, 3)
+        return Array.from(new Set(roles.map(a => a.name))).map(name => { return roles.find(a => a.name === name) })
     }
     function getRoles (person) {
         return details?.crew.filter(({name}) => name === person)?.map(role => role.job).join(', ')
@@ -34,7 +34,7 @@ const PrimaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
                         </Typography>
                         <div style={{display: 'flex', gap: '10px'}}>
                             <Typography sx={{color: 'white'}}>
-                                {getCertificate(getCountry()) && <span className="certification">{getCertificate(getCountry())}</span>}
+                                {getCertificate() && <span className="certification">{getCertificate()}</span>}
                                 {moment(details.release_date).format('MMM DD, YYYY')+`${getCountry() ? ` (${getCountry()})` : ''}`}
                             </Typography>
                             <Typography sx={{color: 'white'}}><li>{details?.genres?.map(genre => genre.name).join(', ')}</li></Typography>
@@ -46,9 +46,11 @@ const PrimaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
                             <span style={{fontWeight: 'bolder', fontSize: '18px'}}>Overview</span>
                             <span style={{fontSize: '15px'}}>{details?.overview}</span>
                         </div>
-                        <div style={{color: 'white', display: 'flex', flexDirection: 'column', gap: 5, padding: '10px 0'}}>
-                            <span style={{fontWeight: 'bolder', fontSize: '15px'}}>{getDirector()}</span>
-                            <span style={{fontSize: '13px'}}>{getRoles(getDirector())}</span>
+                        <div style={{display: 'flex', gap: 40}}>
+                            {getTopCrew().map(crew => <div key={crew.id} style={{color: 'white', display: 'flex', flexDirection: 'column', gap: 5, padding: '10px 0'}}>
+                                <span style={{fontWeight: 'bolder', fontSize: '15px'}}>{crew?.name || 'NA'}</span>
+                                <span style={{fontSize: '13px'}}>{getRoles(crew?.name)}</span>
+                            </div>)}
                         </div>
                     </div>
                 </div>
