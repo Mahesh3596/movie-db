@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import moment from "moment";
 import PrimaryDetailsAction from "./PrimaryDetailsAction";
+import imgPlaceholder from "../../assets/trending-movies-ph.png"
 
 const PrimaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
     function getCountry () {
@@ -22,11 +23,15 @@ const PrimaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
             <div style={{backgroundColor: 'rgb(0 17 30 / 75%)', height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <div style={{width: '80%', display: 'flex'}}>
                     <div className="details-thumbnail">
-                        <img
+                        {details?.poster_path ? <img
                             loading='lazy'
                             src={`${imageBaseURL}w500${details.poster_path}`}
                             alt={details?.title || details?.original_name}
-                        />
+                        />:
+                        <img
+                            src={imgPlaceholder}
+                            alt={details?.title || details?.original_name}
+                        />}
                     </div>
                     <div className="primary-details-section">
                         <Typography sx={{color: 'white', paddingBottom: '5px'}} variant="h5" fontWeight="bold">

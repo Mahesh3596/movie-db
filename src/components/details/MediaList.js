@@ -10,8 +10,8 @@ const MostPopular = ({medias=[], imageBaseURL='', onItemClick=()=>{}}) => {
             <img loading="lazy" width="450px" height="100%" src={`https://img.youtube.com/vi/${medias.videos[0].key}/0.jpg`} style={{objectFit: 'none'}}/>
             <Box sx={{position: 'absolute', top: '42%', left: '43%', color: 'white'}}><PlayArrow sx={{fontSize: '50px', background: '#0000008f', borderRadius: '50px'}}/></Box>
         </div>}
-        {medias?.backdrops && <img loading="lazy" height="100%" src={`${imageBaseURL}w780${medias.backdrops[0].file_path}`} onClick={() => onItemClick('image', medias.backdrops[0])}/>}
-        {medias?.posters && <img loading="lazy" height="100%" src={`${imageBaseURL}w342${medias.posters[0].file_path}`} onClick={() => onItemClick('image', medias.posters[0])}/>}
+        {medias?.backdrops.length > 0 && <img loading="lazy" height="100%" src={`${imageBaseURL}w780${medias.backdrops?.[0]?.file_path}`} onClick={() => onItemClick('image', medias.backdrops[0])}/>}
+        {medias?.posters.length > 0 && <img loading="lazy" height="100%" src={`${imageBaseURL}w342${medias.posters?.[0]?.file_path}`} onClick={() => onItemClick('image', medias.posters[0])}/>}
     </div>)
 }
 const MediaVideos = ({medias=[], imageBaseURL='', onItemClick=()=>{}}) => {

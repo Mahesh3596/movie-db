@@ -1,0 +1,18 @@
+.search-results-container {
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
+    margin-top: 5px;
+    padding: 5px 0;
+    position: absolute;
+    background: white;
+    border-radius: 5px;
+}
+.search-result {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.search-result:hover {
+    background: var(--app-color-secondary);
+}

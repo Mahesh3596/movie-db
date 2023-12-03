@@ -3,6 +3,7 @@ import { AppBar, Slide, Toolbar, Typography, useScrollTrigger } from '@mui/mater
 import AppLogo from 'assets/app-logo.png'
 import NavMenu from './NavMenu';
 import { useNavigate } from 'react-router-dom';
+import SearchApp from './SearchApp';
 
 const menuList = [
     {
@@ -50,26 +51,29 @@ const Navbar = (props) => {
         <React.Fragment>
             <HideOnScroll {...props}>
                 <AppBar elevation={0} sx={{background: 'var(--app-bar-primary)'}}>
-                    <Toolbar style={{width: '80%', alignSelf: 'center'}}>
+                    <Toolbar style={{width: '80%', alignSelf: 'center', display: 'grid', gridTemplateColumns: 'auto 1fr auto'}}>
                         <img
                             width="70px"
                             src={AppLogo}
                             style={{cursor: 'pointer'}}
                             onClick={() => navigate('/movie-db')}
                         />
-                        <Typography 
-                            sx={{display: 'flex', gap: '20px'}}
-                            fontWeight="bold" padding="0 20px"
-                            onMouseLeave={onMenuClose}>
-                            {menuList.map(menu => (
-                                <span key={menu.id} id={menu.id} aria-describedby={menu.id}
-                                    onMouseOver={(e) => onMenuHover(e, menu)}
-                                    style={{cursor: 'pointer'}}>                                    
-                                    {menu.title}
-                                </span>
-                            ))}
-                            {menuAnchorEl && <NavMenu anchorEl={menuAnchorEl} menuObj={menuObj} onMenuClose={onMenuClose}/>}
-                        </Typography>
+                        <div>
+                            <Typography 
+                                sx={{display: 'flex', gap: '20px'}}
+                                fontWeight="bold" padding="0 20px"
+                                onMouseLeave={onMenuClose}>
+                                {menuList.map(menu => (
+                                    <span key={menu.id} id={menu.id} aria-describedby={menu.id}
+                                        onMouseOver={(e) => onMenuHover(e, menu)}
+                                        style={{cursor: 'pointer'}}>                                    
+                                        {menu.title}
+                                    </span>
+                                ))}
+                                {menuAnchorEl && <NavMenu anchorEl={menuAnchorEl} menuObj={menuObj} onMenuClose={onMenuClose}/>}
+                            </Typography>
+                        </div>
+                        <SearchApp/>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>

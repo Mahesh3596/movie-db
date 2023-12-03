@@ -14,7 +14,7 @@ const SecondarySideDetails = ({details=null, imageBaseURL='', showType=''}) => {
         if (language && tmdbConfig?.languages.length > 0) {
             orgLang = tmdbConfig.languages.filter(lang => lang.iso_639_1 === language)
         }
-        return orgLang?.length > 0 ? orgLang[0].name : '-'
+        return orgLang?.length > 0 ? orgLang[0].english_name : '-'
     }
     return (<>
         <div style={{display: 'flex', gap: 10, padding: '20px 20px 0 20px', opacity: 0.7}}>
@@ -41,7 +41,7 @@ const SecondarySideDetails = ({details=null, imageBaseURL='', showType=''}) => {
         :
         <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Network</Typography>
-            {details?.networks.length > 0 ? details.networks.map(network => <img width="50px" key={network.id} src={`${imageBaseURL}w92${network.logo_path}`}/>) : '-'}
+            {details?.networks?.length > 0 ? details.networks.map(network => <img width="50px" key={network.id} src={`${imageBaseURL}w92${network.logo_path}`}/>) : '-'}
         </div>}
         {showType === 'movie' ? <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Revenue</Typography>
