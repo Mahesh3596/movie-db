@@ -1,12 +1,24 @@
 .search-results-container {
     width: 100%;
-    max-height: 500px;
+    max-height: 425px;
     overflow: auto;
     margin-top: 5px;
     padding: 5px 0;
     position: absolute;
     background: white;
     border-radius: 5px;
+}
+.viewall-search-results {
+    width: 100%;
+    top: 480px;
+    position: absolute;
+    background: white;
+    color: var(--app-color-primary);
+    border-radius: 5px;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
 }
 .search-result {
     display: flex;

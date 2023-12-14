@@ -1,0 +1,22 @@
+.search-count {
+    max-height: 300px;
+    width: 200px;
+}
+.search-count-items {
+    padding: 0 10px;
+}
+.search-count-items > div {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto auto;
+    padding: 10px 0;
+    cursor: pointer;
+}
+.search-count-items:hover {
+    background: #e9f1f6;
+}
+.search-count-items.active {
+    background: #e9f1f6;
+    color: var(--app-bar-primary);
+    box-shadow: inset 0px 0px 10px 0px;
+}

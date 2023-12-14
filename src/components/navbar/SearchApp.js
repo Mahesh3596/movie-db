@@ -52,6 +52,9 @@ const SearchApp = ({}) => {
         }
         return orgLang?.length > 0 ? orgLang[0].english_name : '-'
     }
+    const onViewAllClick = () => {
+        navigate(`movie-db/search/movie?query=${search}`)
+    }
 
     return (<div style={{justifySelf: 'end', width: '300px', position: 'relative'}}>
         <TextField
@@ -92,6 +95,9 @@ const SearchApp = ({}) => {
                     </div>
                 <hr/>
             </div>)}            
+        </div>}
+        {showResults && searchList?.length > 4 && <div className="viewall-search-results" onClick={onViewAllClick}>
+            <Typography>View All Results</Typography>
         </div>}
     </div>)
 }
