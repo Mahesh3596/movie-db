@@ -1,5 +1,6 @@
 import { Bookmark, Favorite, PlayArrow, PlaylistAdd, Star } from "@mui/icons-material";
 import { Box, CircularProgress, Typography } from "@mui/material";
+import { getFormattedVoteCount, getRatingRounded } from "common/utils";
 import TrailerPopup from "components/dashboard/upcoming_trailers/TrailerPopup";
 import { useEffect, useState } from "react";
 
@@ -15,7 +16,6 @@ const PrimaryDetailsAction = ({details=null, ...props}) => {
         }
     }, [details])
 
-    const getRatingRounded = () => {return Math.round(rating * 10) / 10}
     const onHandlePopupClose = () => {
         setTrailerPopupObj(prevState => ({...prevState, open: false, trailerObj: {}}))
     }
@@ -40,7 +40,7 @@ const PrimaryDetailsAction = ({details=null, ...props}) => {
                     <CircularProgress 
                         {...props}
                         variant="determinate" 
-                        value={getRatingRounded()*10} 
+                        value={getRatingRounded(rating)*10} 
                         size={40}
                         sx={{color: `${rating < 4 ? "red" : rating >= 4 && rating < 7 ? "yellow" : "lightgreen"}`}}/>
                     <Box
@@ -56,11 +56,11 @@ const PrimaryDetailsAction = ({details=null, ...props}) => {
                     }}
                     >
                         <Typography variant="subtitle" component="div" color="white" sx={{fontSize: '15px', fontWeight: '600'}}>
-                            {rating ? getRatingRounded() : 'NR'}
+                            {rating ? getRatingRounded(rating) : 'NR'}
                         </Typography>
                     </Box>
                 </Box>
-                <span style={{fontSize: '15px', color: 'white', fontWeight: 'bold', paddingLeft: '0.5rem'}}>User<br/>Score</span>
+                <span style={{fontSize: '15px', color: 'white', fontWeight: 'bold', paddingLeft: '0.5rem'}}>user score<br/>{getFormattedVoteCount(details?.vote_count || 0)}</span>
             </div>
             <Box className='primary-details-action-btn'><PlaylistAdd fontSize="10px"/></Box>
             <Box className='primary-details-action-btn'><Favorite fontSize="10px"/></Box>

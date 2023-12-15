@@ -25,3 +25,18 @@ export const getGender = (gender) => {
 export const getFormattedDate = (date, format) => {
     return date ? moment(date).format(format) : 'NA'
 }
+
+export const getFormattedVoteCount = (voteCount) => {
+    let formatted = ''
+    if (voteCount >= 100000 && voteCount < 10000000) 
+        formatted = parseFloat(voteCount/1000000).toPrecision(2)+'m'
+    else if (voteCount >= 1000 && voteCount < 100000) 
+        formatted = parseFloat(voteCount/1000).toPrecision(2)+'k'
+    else if (voteCount < 1000) 
+        formatted = voteCount
+    else
+        formatted = voteCount
+    return formatted + ' votes'
+}
+
+export const getRatingRounded = (rating) => {return Math.round(rating * 10) / 10}

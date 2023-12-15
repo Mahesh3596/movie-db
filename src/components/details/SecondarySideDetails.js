@@ -2,6 +2,7 @@ import { Facebook, Instagram, Link, Twitter, YouTube } from "@mui/icons-material
 import { Chip, Stack, Typography } from "@mui/material";
 import { AppContext } from "contexts/AppContext";
 import { useContext } from "react";
+import ProvidersList from "./ProvidersList";
 
 const SecondarySideDetails = ({details=null, imageBaseURL='', showType=''}) => {
     const {tmdbConfig} = useContext(AppContext)
@@ -51,6 +52,9 @@ const SecondarySideDetails = ({details=null, imageBaseURL='', showType=''}) => {
         <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '14px'}} fontWeight='bold'>Type</Typography>
             <Typography sx={{fontSize: '14px'}}>{details?.type || '-'}</Typography>
+        </div>}
+        {showType === 'movie' && <div style={{padding: '20px 20px 0 20px'}}>
+            <ProvidersList details={details} imageBaseURL={imageBaseURL} showType={showType} key={details.id}/>
         </div>}
         <div style={{padding: '20px 20px 0 20px'}}>
             <Typography sx={{fontSize: '16px'}} fontWeight='bold'>Keywords</Typography>
