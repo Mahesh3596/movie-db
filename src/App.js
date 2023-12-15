@@ -2,6 +2,7 @@ import './App.css';
 import { AppContextProvider } from './contexts/AppContext';
 import LandingPage from './pages/LandingPage';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import './firebase/config.js'
 
 function App() {
   return (
