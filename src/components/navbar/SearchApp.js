@@ -30,7 +30,7 @@ const SearchApp = ({}) => {
         if (value.length > 0) {
             await getSearchData(value)
         } else {
-            setSearchList(null)
+            clearSearch()
         }
     }
     const onResultClick = (search) => {
@@ -52,8 +52,16 @@ const SearchApp = ({}) => {
         }
         return orgLang?.length > 0 ? orgLang[0].english_name : '-'
     }
+    const clearSearch = () => {
+        setSearch('')
+        setSearchList(null)
+        setShowResults(false)
+        clearTimeout(timer)
+        setTimer(null)
+    }
     const onViewAllClick = () => {
         navigate(`movie-db/search/movie?query=${search}`)
+        clearSearch()
     }
 
     return (<div style={{justifySelf: 'end', width: '300px', position: 'relative'}}>

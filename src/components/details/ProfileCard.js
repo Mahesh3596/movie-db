@@ -19,9 +19,7 @@ const ProfileCard = ({info=null, imageBaseURL=''}) => {
             <div style={{padding: '10px'}}>
                 <Typography fontSize="14px" fontWeight={700}>{info?.name || ''}</Typography>
                 <Tooltip title={info?.character || ''}>
-                    <Typography fontSize="14px" 
-                        sx={{overflow: 'hidden', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', display:'-webkit-box'}}
-                    >
+                    <Typography fontSize="14px" className="txt-ellipsis-2">
                         {info?.character || ''}
                     </Typography>
                 </Tooltip>

@@ -12,6 +12,7 @@ const SearchResultPage = ({}) => {
     const [searchResults, setSearchResults] = useState(null)
 
     useEffect(() => {
+        if (searchResults) setSearchResults(null)
         if (searchParams.get('query')) getAllResults(searchParams.get('query').trim())
     }, [searchParams])
 
@@ -36,7 +37,12 @@ const SearchResultPage = ({}) => {
     return (<div style={{display: 'flex', justifyContent: 'center'}}>
         <div style={{display: 'flex', width: '80%', gap: 20, padding: '10px'}}>
             <SearchCount searchResults={searchResults} type={type} searchVal={searchParams.get('query').trim()}/>
-            {searchParams && <SearchResults/>}
+            {searchParams && <SearchResults
+                type={type}
+                searchList={searchResults}
+                searchVal={searchParams.get('query').trim()}
+                page={searchParams.get('page') || 1}
+            />}
         </div>
     </div>)
 }
