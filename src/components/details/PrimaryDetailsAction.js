@@ -3,6 +3,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import { getFormattedVoteCount, getRatingRounded } from "common/utils";
 import TrailerPopup from "components/dashboard/upcoming_trailers/TrailerPopup";
 import { useEffect, useState } from "react";
+import MyPageService from "services/MyPageService";
 
 const PrimaryDetailsAction = ({details=null, ...props}) => {
     let rating = details.vote_average
@@ -23,6 +24,9 @@ const PrimaryDetailsAction = ({details=null, ...props}) => {
         if (trailerPopupObj.open == false) {
             setTrailerPopupObj(prevState => ({...prevState, open: true, trailerObj: trailerObj}))
         }
+    }
+    const onAddToWatchList = async () => {
+        // await MyPageService.addToWatchedList(details)
     }
 
     return (
@@ -62,7 +66,7 @@ const PrimaryDetailsAction = ({details=null, ...props}) => {
                 </Box>
                 <span style={{fontSize: '15px', color: 'white', fontWeight: 'bold', paddingLeft: '0.5rem'}}>user score<br/>{getFormattedVoteCount(details?.vote_count || 0)}</span>
             </div>
-            <Box className='primary-details-action-btn'><PlaylistAdd fontSize="10px"/></Box>
+            <Box className='primary-details-action-btn'><PlaylistAdd fontSize="10px" onClick={onAddToWatchList}/></Box>
             <Box className='primary-details-action-btn'><Favorite fontSize="10px"/></Box>
             <Box className='primary-details-action-btn'><Bookmark fontSize="10px"/></Box>
             <Box className='primary-details-action-btn'><Star fontSize="10px"/></Box>
