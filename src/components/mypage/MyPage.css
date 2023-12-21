@@ -1,0 +1,20 @@
+.my-page-nav {
+    max-height: 300px;
+    width: 200px;
+}
+.nav-items {
+    padding: 0 10px;
+}
+.nav-items > div {
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+}
+.nav-items:hover {
+    background: #e9f1f6;
+}
+.nav-items.active {
+    background: #e9f1f6;
+    color: var(--app-bar-primary);
+    box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+}

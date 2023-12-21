@@ -51,7 +51,7 @@ const Navbar = (props) => {
         <React.Fragment>
             <HideOnScroll {...props}>
                 <AppBar elevation={0} sx={{background: 'var(--app-bar-primary)'}}>
-                    <Toolbar style={{width: '80%', alignSelf: 'center', display: 'grid', gridTemplateColumns: 'auto 1fr auto'}}>
+                    <Toolbar style={{width: '80%', alignSelf: 'center', display: 'grid', gridTemplateColumns: 'auto 1fr auto auto'}}>
                         <img
                             width="70px"
                             src={AppLogo}
@@ -72,6 +72,11 @@ const Navbar = (props) => {
                                 ))}
                                 {menuAnchorEl && <NavMenu anchorEl={menuAnchorEl} menuObj={menuObj} onMenuClose={onMenuClose}/>}
                             </Typography>
+                        </div>
+                        <div style={{justifySelf: 'end'}}>
+                            <Typography fontWeight="bold" padding="0 20px" sx={{cursor: 'pointer'}}
+                                onClick={() => navigate('/movie-db/mypage/my_watched_list')}
+                            >My Page</Typography>
                         </div>
                         <SearchApp/>
                     </Toolbar>
