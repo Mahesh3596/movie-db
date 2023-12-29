@@ -45,7 +45,7 @@ const PrimaryDetails = ({details=null, imageBaseURL='', showType=''}) => {
                             <Typography sx={{color: 'white'}}><li>{details?.genres?.map(genre => genre.name).join(', ')}</li></Typography>
                             {showType !== 'tv' && <Typography sx={{color: 'white'}}><li>{moment.duration(details?.runtime, 'minutes').hours()+'h '+moment.duration(details?.runtime, 'minutes').minutes()+'m'}</li></Typography>}
                         </div>
-                        <PrimaryDetailsAction details={details}/>
+                        <PrimaryDetailsAction details={details} showType={showType}/>
                         <span style={{color: 'silver', fontStyle: 'italic'}}>{details?.tagline}</span>
                         <div style={{color: 'white', display: 'flex', flexDirection: 'column', gap: 10, padding: '10px 0'}}>
                             <span style={{fontWeight: 'bolder', fontSize: '18px'}}>Overview</span>
