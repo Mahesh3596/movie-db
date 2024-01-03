@@ -1,8 +1,16 @@
 import { Delete, Edit, Favorite, FavoriteBorder, RemoveRedEye, Star } from "@mui/icons-material";
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { getFormattedDate } from "common/utils";
+import ModalAddToWatchedList from "./ModalAddToWatchedList";
+import { useState } from "react";
+import ModalViewWatchedList from "./ModalViewWatchedList";
 
 const MyWatchedListCard = ({media=null, imageBaseURL=''}) => {
+    const [popupObj, setPopupObj] = useState({openEditPopup: false, openViewPopup: false})
+
+    const onDelete = () => {
+
+    }
 
     return (<div className="watched-list-item">
     <div className="watched-list-poster">
@@ -19,20 +27,30 @@ const MyWatchedListCard = ({media=null, imageBaseURL=''}) => {
         </Box>
         <Typography sx={{fontSize: '14px', marginTop: '5px'}} className="txt-ellipsis-2">{media?.overview || 'NA'}</Typography>
         <Box sx={{display: 'flex', marginTop: '5px'}}>
-            <Typography sx={{fontSize: '14px', fontStyle: 'italic'}}>Released On :&nbsp;</Typography>
-            <Typography sx={{fontSize: '14px'}}>{getFormattedDate(media?.release_date || media?.first_air_date, 'MMM DD, YYYY')}</Typography>
+            <Typography sx={{fontSize: '14px', fontStyle: 'italic'}}>Watched On :&nbsp;</Typography>
+            <Typography sx={{fontSize: '14px'}}>{getFormattedDate(media?.watched_on, 'MMM DD, YYYY')}</Typography>
         </Box>
         <Box sx={{display: 'grid', marginTop: '5px', gridTemplateColumns: 'auto auto 1fr'}}>
-            <Typography sx={{fontSize: '14px', fontStyle: 'italic'}}>Watched On :&nbsp;</Typography>
-            <Typography sx={{fontSize: '14px'}} className="txt-ellipsis-1">{media?.watched_on || 'NA'}</Typography>
-            <Box sx={{justifySelf: 'flex-end', paddingRight: '10px', display: 'flex', gap:1}}>
-                <RemoveRedEye fontSize="small"/>
-                <FavoriteBorder fontSize="small"/>
-                <Edit fontSize="small"/>
-                <Delete fontSize="small"/>
+            <Typography sx={{fontSize: '14px', fontStyle: 'italic'}}>Watched At :&nbsp;</Typography>
+            <Typography sx={{fontSize: '14px'}} className="txt-ellipsis-1">{media?.watched_at || 'NA'}</Typography>
+            <Box sx={{justifySelf: 'flex-end', paddingRight: '10px', display: 'flex'}}>
+                <IconButton onClick={() => setPopupObj({openViewPopup: true})}>
+                    <RemoveRedEye fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>
+                </IconButton>
+                <IconButton>
+                    <FavoriteBorder fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>
+                </IconButton>
+                <IconButton onClick={() => setPopupObj({openEditPopup: true})}>
+                    <Edit fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>
+                </IconButton>
+                <IconButton onClick={() => onDelete()}>
+                    <Delete fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>
+                </IconButton>
             </Box>
         </Box>
     </Box>
+    {popupObj.openEditPopup && <ModalAddToWatchedList mode='edit' open={popupObj.openEditPopup} details={media} showType={media.type} onModalClose={() => setPopupObj({openEditPopup: false})}/>}
+    {popupObj.openViewPopup && <ModalViewWatchedList open={popupObj.openViewPopup} details={media} showType={media.type} onModalClose={() => setPopupObj({openViewPopup: false})}/>}
 </div>)
 }
 
