@@ -1,7 +1,20 @@
-import { setDoc, doc } from 'firebase/firestore'
+import { setDoc, doc, getDocs, collection } from 'firebase/firestore'
 import { db } from './config'
 
 
+const getAllDocs = async (collectionPath='') => {
+    try {
+        if (!collectionPath) throw 'Missing collection path!'
+        const querySnapshot = await getDocs(collection(db, collectionPath))
+        const results = querySnapshot.docs.map((doc) => {
+            return doc.data()
+        })
+        return results
+    } catch (e) {
+        console.error("Error on get all documents: ", e)
+        throw { success: false, message: e?.message || e }
+    }
+}
 const upsertDoc = async (collectionPath='', data={}, docId) => {
     try {
         if (!collectionPath) throw 'Missing collection path!'
@@ -15,5 +28,6 @@ const upsertDoc = async (collectionPath='', data={}, docId) => {
 }
 
 export default {
+    getAllDocs,
     upsertDoc
 }
