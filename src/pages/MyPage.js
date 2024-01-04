@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AppContext } from 'contexts/AppContext';
 
 const MyPage = ({}) => {
-    const {tmdbConfig} = useContext(AppContext)
+    const {tmdbConfig, showLoading, showSnackbar} = useContext(AppContext)
     const {page} = useParams()
     const [imageBaseURL, setImageBaseURL] = useState('')
 
@@ -17,7 +17,7 @@ const MyPage = ({}) => {
     return (<div style={{display: 'flex', justifyContent: 'center'}}>
         <div style={{display: 'flex', width: '80%', gap: 20, padding: '10px'}}>
             <MyPageNav currentPage={page}/>
-            {imageBaseURL && <MyWatchedList imageBaseURL={imageBaseURL}/>}
+            {imageBaseURL && <MyWatchedList imageBaseURL={imageBaseURL} showLoading={showLoading} showSnackbar={showSnackbar}/>}
         </div>
     </div>)
 }

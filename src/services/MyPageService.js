@@ -18,8 +18,18 @@ const upsertToWatchedList = async (reqData={}) => {
         throw e?.message || e
     }
 }
+const removeWatchedList = async (docId=null) => {
+    try {
+        const collectionPath = `movie_db/8589830226/my_watched_list/${docId}`
+        const response = await service.removeDoc(collectionPath)
+        return response
+    } catch (e) {
+        throw e?.message || e
+    }
+}
 
 export default {
     getWatchedList,
-    upsertToWatchedList
+    upsertToWatchedList,
+    removeWatchedList
 }

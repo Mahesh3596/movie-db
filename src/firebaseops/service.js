@@ -1,4 +1,4 @@
-import { setDoc, doc, getDocs, collection } from 'firebase/firestore'
+import { setDoc, doc, getDocs, collection, deleteDoc } from 'firebase/firestore'
 import { db } from './config'
 
 
@@ -26,8 +26,20 @@ const upsertDoc = async (collectionPath='', data={}, docId) => {
         throw { success: false, message: e?.message || e }
     }
 }
+const removeDoc = async (collectionPath='') => {
+    try {
+        if (!collectionPath) throw 'Missing collection path!'
+        const docRef = doc(db, collectionPath)
+        await deleteDoc(docRef)
+        return {success: true}
+    } catch (e) {
+        console.error("Error on delete document: ", e)
+        throw { success: false, message: e?.message || e }
+    }
+}
 
 export default {
     getAllDocs,
-    upsertDoc
+    upsertDoc,
+    removeDoc
 }

@@ -1,15 +1,32 @@
-import { Delete, Edit, Favorite, FavoriteBorder, RemoveRedEye, Star } from "@mui/icons-material";
+import { Delete, Edit, Favorite, FavoriteBorder, RemoveRedEye, Star, Warning } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import { getFormattedDate } from "common/utils";
 import ModalAddToWatchedList from "./ModalAddToWatchedList";
 import { useState } from "react";
 import ModalViewWatchedList from "./ModalViewWatchedList";
+import MyPageService from "services/MyPageService";
+import ConfirmationModal from "components/common/ConfirmationModal";
 
-const MyWatchedListCard = ({media=null, imageBaseURL=''}) => {
-    const [popupObj, setPopupObj] = useState({openEditPopup: false, openViewPopup: false})
+const MyWatchedListCard = ({media=null, imageBaseURL='', showLoading=() => {}, showSnackbar=() => {}}) => {
+    const [popupObj, setPopupObj] = useState({openEditPopup: false, openViewPopup: false, openConfirmation: false})
 
     const onDelete = () => {
-
+        setPopupObj({
+            openConfirmation: true,
+            onConfirmation: async (resp) => { if (resp === true) await deleteWatchedList(); else setPopupObj({openConfirmation: false}); },
+            message: 'Are you sure?',
+            icon: <Warning color="warning" sx={{fontSize: '50px'}}/>
+        })
+    }
+    const deleteWatchedList = async () => {
+        showLoading(true)
+        const res = await MyPageService.removeWatchedList(media.id)
+        if (res.success) {
+            // showSnackbar({show: true, message: 'Removed from watched list!', type: 'success'})
+            setPopupObj({openConfirmation: false})
+            window.location.reload()
+        }
+        showLoading(false)
     }
 
     return (<div className="watched-list-item">
@@ -50,7 +67,11 @@ const MyWatchedListCard = ({media=null, imageBaseURL=''}) => {
         </Box>
     </Box>
     {popupObj.openEditPopup && <ModalAddToWatchedList mode='edit' open={popupObj.openEditPopup} details={media} showType={media.type} onModalClose={() => setPopupObj({openEditPopup: false})}/>}
-    {popupObj.openViewPopup && <ModalViewWatchedList open={popupObj.openViewPopup} details={media} showType={media.type} onModalClose={() => setPopupObj({openViewPopup: false})}/>}
+    {popupObj.openViewPopup && <ModalViewWatchedList imageBaseURL={imageBaseURL} open={popupObj.openViewPopup} details={media} showType={media.type} onModalClose={() => setPopupObj({openViewPopup: false})}/>}
+    {popupObj.openConfirmation && <ConfirmationModal 
+        open={popupObj.openConfirmation} 
+        onConfirmation={popupObj.onConfirmation}
+        message={popupObj.message} icon={popupObj.icon}/>}
 </div>)
 }
 

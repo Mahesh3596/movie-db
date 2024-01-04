@@ -71,7 +71,7 @@ const PrimaryDetailsAction = ({details=null, showType='', ...props}) => {
                 <span style={{fontSize: '15px', color: 'white', fontWeight: 'bold', paddingLeft: '0.5rem'}}>user score<br/>{getFormattedVoteCount(details?.vote_count || 0)}</span>
             </div>
             <Box className='primary-details-action-btn'>
-                <Tooltip title="Add To Watch List"><PlaylistAdd onClick={onAddToWatchList} sx={{fontSize: '20px'}}/></Tooltip>
+                <Tooltip title="Add To Bucket List"><PlaylistAdd onClick={onAddToWatchList} sx={{fontSize: '20px'}}/></Tooltip>
                 
             </Box>
             {/* <Box className='primary-details-action-btn'>

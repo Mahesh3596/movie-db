@@ -2,9 +2,9 @@ import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const navigations = [
-    {title: 'My Watched List', value: 'my_watched_list'},
-    {title: 'My Watch List', value: 'my_watch_list'},
-    {title: 'My Favourites', value: 'my_favourites'}
+    {title: 'Watched List', value: 'my_watched_list'},
+    {title: 'Bucket List', value: 'my_bucket_list'},
+    {title: 'Favourites', value: 'my_favourites'}
 ]
 
 const MyPageNav = ({currentPage=''}) => {
