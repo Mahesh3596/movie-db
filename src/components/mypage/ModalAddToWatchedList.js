@@ -66,7 +66,7 @@ const ModalAddToWatchedList = ({mode='create', open=false, details=null, showTyp
                     type: showType,
                     is_watched_list: true
                 }
-                const res = await MyPageService.upsertToWatchedList(req)
+                const res = await MyPageService.upsertToMyList(req)
                 if (res.id) {
                     onCancel(); showSnackbar({show: true, message: mode === 'edit' ? 'Watched list updated!' : 'Added to watched list!', type: 'success'}); 
                     if (mode==='edit' || refresh) refresh();

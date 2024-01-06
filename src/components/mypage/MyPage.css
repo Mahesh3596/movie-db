@@ -29,3 +29,11 @@
     width: 100px;
     border-radius: 10px 0 0 10px;
 }
+.favourite-list-item {
+    width: 250px;
+    height: 280px;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+}

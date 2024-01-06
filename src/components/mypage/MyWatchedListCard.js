@@ -18,9 +18,21 @@ const MyWatchedListCard = ({media=null, imageBaseURL='', showLoading=() => {}, s
             icon: <Warning color="warning" sx={{fontSize: '50px'}}/>
         })
     }
+    const onFavClick = async () => {
+        showLoading(true)
+        const res = await MyPageService.upsertToMyList({
+            id: media.id,
+            is_favourite: !media?.is_favourite
+        })
+        if (res.success) {
+            showSnackbar({show: true, message: media?.is_favourite ? 'Removed from Favourites!' : 'Added to Favourites!', type: 'success'})
+            refreshCard()
+        }
+        showLoading(false)
+    }
     const deleteWatchedList = async () => {
         showLoading(true)
-        const res = await MyPageService.upsertToWatchedList({
+        const res = await MyPageService.upsertToMyList({
             id: media.id,
             is_watched_list: false
         })
@@ -57,8 +69,9 @@ const MyWatchedListCard = ({media=null, imageBaseURL='', showLoading=() => {}, s
                 <IconButton onClick={() => setPopupObj({openViewPopup: true})}>
                     <RemoveRedEye fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>
                 </IconButton>
-                <IconButton>
-                    <FavoriteBorder fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>
+                <IconButton onClick={onFavClick}>
+                    {media?.is_favourite ? <Favorite fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>
+                    : <FavoriteBorder fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>}
                 </IconButton>
                 <IconButton onClick={() => setPopupObj({openEditPopup: true})}>
                     <Edit fontSize="small" sx={{cursor: 'pointer', color: 'var(--app-color-primary)'}}/>
