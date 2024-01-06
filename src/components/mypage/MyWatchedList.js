@@ -11,13 +11,16 @@ const MyWatchedList = ({imageBaseURL='', showLoading=() => {}, showSnackbar=() =
     const getWatchedMovies = async () => {
         showLoading(true)
         const results = await MyPageService.getWatchedList()
-        if (results.length > 0) setWatchedList(results)
+        setWatchedList(results)
         showLoading(false)
     }
+    const refreshCard = async () => { await getWatchedMovies() }
     return (watchedList.length > 0 && 
         <div style={{width: '100%', display: 'flex', flexDirection: 'column', gap: 10}}>
         {watchedList.map((media) => 
-            <MyWatchedListCard key={media.id} media={media} imageBaseURL={imageBaseURL} showLoading={showLoading} showSnackbar={showSnackbar}/>)}
+            <MyWatchedListCard key={media.id} media={media} imageBaseURL={imageBaseURL} 
+                showLoading={showLoading} showSnackbar={showSnackbar}
+                refreshCard={refreshCard}/>)}
         </div>)
 }
 

@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react"
 import MyPageService from "services/MyPageService"
 import dayjs from "dayjs";
 import { Modal, Box, TextField, Rating, Typography, Button } from "@mui/material"
+import { buildRequestBody } from "./myPageUtils"
 
 const modalBoxStyle = {
     display: 'flex',
@@ -22,7 +23,7 @@ const modalBoxStyle = {
     p: 3,
 }
 
-const ModalAddToWatchedList = ({mode='create', open=false, details=null, showType='', onModalClose=()=>{}}) => {
+const ModalAddToWatchedList = ({mode='create', open=false, details=null, showType='', onModalClose=()=>{}, refresh=null}) => {
     const {showLoading, showSnackbar} = useContext(AppContext)
     const [dataObj, setDataObj] = useState({})
     const [dispRating, setDispRating] = useState(-1)
@@ -58,28 +59,17 @@ const ModalAddToWatchedList = ({mode='create', open=false, details=null, showTyp
         try {
             if (isDataValid()) {
                 showLoading(true)
+                const detailsReq = buildRequestBody(details, mode==='edit')
                 const req = {
                     ...dataObj,
+                    ...detailsReq,
                     type: showType,
-                    id: details.id,
-                    backdrop_path: details.backdrop_path,
-                    budget: details.budget,
-                    original_language: details.original_language,
-                    original_title: details.original_title,
-                    overview: details.overview,
-                    poster_path: details.poster_path,
-                    release_date: details.release_date,
-                    revenue: details.revenue,
-                    runtime: details.runtime,
-                    tagline: details.tagline, title: details.title, status: details.status,
-                    vote_average: details.vote_average, vote_count: details.vote_count,
-                    created_on: moment.utc().format(),
-                    updated_on: moment.utc().format()
+                    is_watched_list: true
                 }
                 const res = await MyPageService.upsertToWatchedList(req)
                 if (res.id) {
                     onCancel(); showSnackbar({show: true, message: mode === 'edit' ? 'Watched list updated!' : 'Added to watched list!', type: 'success'}); 
-                    if (mode==='edit') window.location.reload();
+                    if (mode==='edit' || refresh) refresh();
                 }
                 showLoading(false)
             }

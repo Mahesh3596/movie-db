@@ -1,9 +1,12 @@
+import { collection, orderBy, query, where } from "firebase/firestore"
+import { db } from "firebaseops/config"
 import service from "firebaseops/service"
 
 const getWatchedList = async () => {
     try {
-        const collectionPath = "movie_db/8589830226/my_watched_list"
-        const response = await service.getAllDocs(collectionPath)
+        const collectionPath = "movie_db/8589830226/my_list"
+        const condition = query(collection(db, collectionPath), where('is_watched_list', '==', true), orderBy('created_on'))
+        const response = await service.getAllDocs(collectionPath, condition)
         return response
     } catch (e) {
         throw e?.message || e
@@ -11,17 +14,8 @@ const getWatchedList = async () => {
 }
 const upsertToWatchedList = async (reqData={}) => {
     try {
-        const collectionPath = "movie_db/8589830226/my_watched_list"
+        const collectionPath = "movie_db/8589830226/my_list"
         const response = await service.upsertDoc(collectionPath, reqData, reqData.id)
-        return response
-    } catch (e) {
-        throw e?.message || e
-    }
-}
-const removeWatchedList = async (docId=null) => {
-    try {
-        const collectionPath = `movie_db/8589830226/my_watched_list/${docId}`
-        const response = await service.removeDoc(collectionPath)
         return response
     } catch (e) {
         throw e?.message || e
@@ -30,6 +24,5 @@ const removeWatchedList = async (docId=null) => {
 
 export default {
     getWatchedList,
-    upsertToWatchedList,
-    removeWatchedList
+    upsertToWatchedList
 }

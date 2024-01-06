@@ -1,11 +1,12 @@
-import { setDoc, doc, getDocs, collection, deleteDoc } from 'firebase/firestore'
+import { setDoc, doc, getDocs, deleteDoc } from 'firebase/firestore'
 import { db } from './config'
 
 
-const getAllDocs = async (collectionPath='') => {
+const getAllDocs = async (collectionPath='', condition=null) => {
     try {
         if (!collectionPath) throw 'Missing collection path!'
-        const querySnapshot = await getDocs(collection(db, collectionPath))
+        if (!condition) throw 'Missing condition!'
+        let querySnapshot = await getDocs(condition)
         const results = querySnapshot.docs.map((doc) => {
             return doc.data()
         })

@@ -7,7 +7,7 @@ import ModalViewWatchedList from "./ModalViewWatchedList";
 import MyPageService from "services/MyPageService";
 import ConfirmationModal from "components/common/ConfirmationModal";
 
-const MyWatchedListCard = ({media=null, imageBaseURL='', showLoading=() => {}, showSnackbar=() => {}}) => {
+const MyWatchedListCard = ({media=null, imageBaseURL='', showLoading=() => {}, showSnackbar=() => {}, refreshCard=() => {}}) => {
     const [popupObj, setPopupObj] = useState({openEditPopup: false, openViewPopup: false, openConfirmation: false})
 
     const onDelete = () => {
@@ -20,11 +20,14 @@ const MyWatchedListCard = ({media=null, imageBaseURL='', showLoading=() => {}, s
     }
     const deleteWatchedList = async () => {
         showLoading(true)
-        const res = await MyPageService.removeWatchedList(media.id)
+        const res = await MyPageService.upsertToWatchedList({
+            id: media.id,
+            is_watched_list: false
+        })
         if (res.success) {
-            // showSnackbar({show: true, message: 'Removed from watched list!', type: 'success'})
+            showSnackbar({show: true, message: 'Removed from watched list!', type: 'success'})
             setPopupObj({openConfirmation: false})
-            window.location.reload()
+            refreshCard()
         }
         showLoading(false)
     }
@@ -66,7 +69,7 @@ const MyWatchedListCard = ({media=null, imageBaseURL='', showLoading=() => {}, s
             </Box>
         </Box>
     </Box>
-    {popupObj.openEditPopup && <ModalAddToWatchedList mode='edit' open={popupObj.openEditPopup} details={media} showType={media.type} onModalClose={() => setPopupObj({openEditPopup: false})}/>}
+    {popupObj.openEditPopup && <ModalAddToWatchedList mode='edit' open={popupObj.openEditPopup} details={media} showType={media.type} onModalClose={() => setPopupObj({openEditPopup: false})} refresh={refreshCard}/>}
     {popupObj.openViewPopup && <ModalViewWatchedList imageBaseURL={imageBaseURL} open={popupObj.openViewPopup} details={media} showType={media.type} onModalClose={() => setPopupObj({openViewPopup: false})}/>}
     {popupObj.openConfirmation && <ConfirmationModal 
         open={popupObj.openConfirmation} 
